@@ -330,6 +330,24 @@
   window.addEventListener('scroll',toggleBar,{passive:true});
   window.addEventListener('resize',toggleBar);
   toggleBar();
+
+  // scroll reveal: ビューポートに入った要素を下からふわっと表示（ヒーロー除外）
+  const mq=window.matchMedia('(prefers-reduced-motion:reduce)');
+  const targets=[...document.querySelectorAll(
+    '.section .eyebrow,.section .sec-head,.section .display,.section .lead,'+
+    '.ac,.svc,.case,.str,.area-row,.map,.area-note,.form-card,.cta-in,.works-more'
+  )];
+  targets.forEach(el=>el.classList.add('reveal'));
+  // 同一親内 stagger
+  document.querySelectorAll('.about-cards,.svc-grid,.works,.str-list,.area-list').forEach(grp=>{
+    [...grp.children].forEach((c,i)=>{ if(c.classList.contains('reveal')) c.style.transitionDelay=Math.min(i*60,240)+'ms'; });
+  });
+  if(mq.matches){ targets.forEach(el=>el.classList.add('in')); }
+  else{
+    const io=new IntersectionObserver((es)=>{es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });},
+      {threshold:0.12,rootMargin:'0px 0px -8% 0px'});
+    targets.forEach(el=>io.observe(el));
+  }
 </script>
 </body>
 </html>
