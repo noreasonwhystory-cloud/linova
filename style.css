@@ -28,7 +28,7 @@ img{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 button{font-family:inherit;cursor:pointer;border:none;background:none}
 
-.page{max-width:440px;margin:0 auto;background:var(--bg);position:relative;overflow:hidden;box-shadow:0 0 60px rgba(20,30,45,.14);}
+.page{max-width:440px;margin:0 auto;background:var(--bg);position:relative;overflow-x:clip;box-shadow:0 0 60px rgba(20,30,45,.14);}
 .inner{width:100%;}
 
 /* ===== shared type ===== */
@@ -239,6 +239,11 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
    ===================================================================== */
 @media (min-width:900px){
   .page{max-width:none;box-shadow:none;}
+
+  /* PC のみ非表示: ABOUT セクション / CTA バナー（空画像枠が目立つため） */
+  .about-sec{display:none;}
+  .cta{display:none;}
+  .nav-desktop a[href="#about"]{display:none;} /* 遷移先消失につき道連れで非表示 */
   .inner{max-width:1200px;margin:0 auto;}
   .section{padding:96px 64px;}
   .sec-head{margin-bottom:48px;}
