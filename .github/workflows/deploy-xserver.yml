@@ -1,0 +1,34 @@
+name: Deploy LINOVA to XServer
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: xserver-linova-deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy static site via FTPS to linova-works.com
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.XSERVER_FTP_HOST }}
+          username: ${{ secrets.XSERVER_FTP_USER }}
+          password: ${{ secrets.XSERVER_FTP_PASSWORD }}
+          local-dir: ./
+          server-dir: ./linova-works.com/public_html/
+          protocol: ftps
+          port: 21
+          security: strict
+          exclude: |
+            **/.git*
+            **/.git*/**
+            .github/**
+            .claude/**
+            CLAUDE.md
+            README.md
