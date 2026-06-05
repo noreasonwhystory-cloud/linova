@@ -54,12 +54,14 @@ function linova_enqueue_assets() {
         null
     );
 
-    // テーマメインCSS（style.css にすべて記述）
+    // テーマメインCSS（style.css にすべて記述）。
+    // バージョンはファイル更新時刻 → 更新の度に自動キャッシュバスト。
+    $css_path = get_stylesheet_directory() . '/style.css';
     wp_enqueue_style(
         'linova-style',
         get_stylesheet_uri(),
         ['linova-fonts'],
-        LINOVA_THEME_VERSION
+        file_exists($css_path) ? filemtime($css_path) : LINOVA_THEME_VERSION
     );
 
     // Lucide アイコン（CDN）
@@ -72,11 +74,12 @@ function linova_enqueue_assets() {
     );
 
     // テーマJS（lucide.createIcons / nav / scroll / reveal）
+    $js_path = get_template_directory() . '/assets/js/main.js';
     wp_enqueue_script(
         'linova-main',
         get_template_directory_uri() . '/assets/js/main.js',
         ['lucide'],
-        LINOVA_THEME_VERSION,
+        file_exists($js_path) ? filemtime($js_path) : LINOVA_THEME_VERSION,
         true
     );
 }
