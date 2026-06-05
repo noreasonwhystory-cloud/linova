@@ -173,7 +173,7 @@ add_action('wp_head', function () {
     }
 
     $description = '愛知・岐阜・三重を中心に、外壁・防水・板金・内装・外構など建物の課題を一貫対応。調査・提案から施工管理まで「' . $site . '」にお任せください。';
-    $image       = get_template_directory_uri() . '/assets/images/ogp.png';
+    $image       = get_template_directory_uri() . '/assets/images/hero.png';
     ?>
     <meta name="description" content="<?php echo esc_attr($description); ?>" />
     <meta property="og:title" content="<?php echo esc_attr($title); ?>" />
@@ -194,3 +194,20 @@ add_action('wp_head', function () {
  * Contact Form 7: 既定CSSを読み込まない（テーマ側で制御）
  */
 add_filter('wpcf7_load_css', '__return_false');
+
+/**
+ * 「設定 → 一般」末尾に CF7 フォームID 設定欄を追加
+ * （トップ問合せフォームに表示する Contact Form 7 のID）
+ */
+add_action('admin_init', function () {
+    register_setting('general', 'linova_cf7_form_id', ['sanitize_callback' => 'absint']);
+
+    add_settings_section('linova_section', 'LINOVAテーマ設定', function () {
+        echo '<p>Contact Form 7 のフォーム編集画面URL末尾 <code>post=NN</code> の数値を入力すると、トップの問い合わせ欄にそのフォームを表示します（0で静的フォールバック）。</p>';
+    }, 'general');
+
+    add_settings_field('linova_cf7_form_id', 'TOP問合せ CF7 フォームID', function () {
+        $value = (int) get_option('linova_cf7_form_id', 0);
+        printf('<input type="number" name="linova_cf7_form_id" value="%d" min="0" step="1" class="small-text" />', $value);
+    }, 'general', 'linova_section');
+});

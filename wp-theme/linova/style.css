@@ -339,7 +339,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
   .case-media{order:0;aspect-ratio:2/1;}
   .case-meta{display:flex;}
   .case-tx h3{font-size:19px;}
-  .case:nth-child(n+4){display:none;}
+  .home .case:nth-child(n+4){display:none;}
   .works-more{max-width:420px;margin:30px auto 0;}
   .works-more:hover{background:var(--bg-soft);}
 
@@ -401,4 +401,58 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .reveal.reveal-in{opacity:1;transform:none;}
 @media (prefers-reduced-motion:reduce){
   .reveal{opacity:1 !important;transform:none !important;transition:none !important;}
+}
+
+/* ============ blog / archive / single (WP) ============ */
+.page-head{margin-bottom:18px}
+.page-head .crumbs{font-size:12px;color:var(--muted);margin-bottom:10px}
+.page-head .crumbs a{color:var(--teal-deep)}
+
+/* 投稿一覧 */
+.post-list{display:flex;flex-direction:column;gap:14px;margin-top:6px}
+.post-item{background:#fff;border:1px solid var(--border);border-radius:13px;overflow:hidden;box-shadow:var(--shadow-soft)}
+.post-item>a{display:grid;grid-template-columns:120px 1fr;gap:14px;align-items:center}
+.post-thumb{aspect-ratio:1/1;overflow:hidden;background:var(--bg-soft)}
+.post-thumb img{width:100%;height:100%;object-fit:cover}
+.post-body{padding:14px 14px 14px 0}
+.post-date{font-family:"Montserrat";font-size:11px;color:var(--muted);letter-spacing:.04em}
+.post-title{font-size:15px;font-weight:700;color:var(--ink);line-height:1.5;margin-top:4px}
+.post-excerpt{font-size:12.5px;color:var(--body);line-height:1.7;margin-top:8px}
+.pager{margin-top:26px}
+.pager .nav-links{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.pager a,.pager span{display:grid;place-items:center;min-width:38px;height:38px;padding:0 10px;border:1px solid var(--border);border-radius:8px;background:#fff;font-family:"Montserrat";font-size:13px;color:var(--ink)}
+.pager .current{background:var(--teal);color:#fff;border-color:var(--teal)}
+
+/* 記事本文 / 固定ページ本文 */
+.entry{max-width:760px;margin:0 auto}
+.entry .post-date{display:block;margin-bottom:8px}
+.entry h1{font-family:"Noto Serif JP",serif;font-size:24px;font-weight:700;line-height:1.5;color:var(--ink)}
+.entry-thumb{margin:18px 0;border-radius:13px;overflow:hidden}
+.entry-thumb img{width:100%;display:block}
+.entry-body{font-size:14.5px;line-height:1.95;color:var(--ink);margin-top:18px}
+.entry-body h2{font-family:"Noto Serif JP",serif;font-size:20px;margin:28px 0 12px;line-height:1.5}
+.entry-body h3{font-size:17px;margin:22px 0 10px}
+.entry-body p{margin:0 0 16px}
+.entry-body img{max-width:100%;height:auto;border-radius:8px;margin:8px 0}
+.entry-body a{color:var(--teal-deep);text-decoration:underline}
+.entry-body ul,.entry-body ol{margin:0 0 16px 1.4em}
+.back-link{display:inline-flex;align-items:center;gap:7px;margin-top:30px;font-weight:700;font-size:13px;color:var(--ink)}
+.back-link svg{width:16px;height:16px;color:var(--teal)}
+
+/* 施工事例 詳細 */
+.work-ba{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0}
+.work-ba figure{margin:0;position:relative;border-radius:12px;overflow:hidden;background:var(--bg-soft)}
+.work-ba img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.work-ba figcaption{position:absolute;top:8px;left:8px;font-family:"Montserrat";font-weight:600;font-size:10px;letter-spacing:.08em;color:#fff;background:rgba(16,28,40,.66);padding:3px 8px;border-radius:3px}
+.work-meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin:14px 0}
+.work-meta span{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--body);font-weight:500}
+.work-meta svg{width:15px;height:15px;color:var(--teal)}
+.work-cat{display:inline-block;font-size:12px;color:var(--teal-deep);font-weight:700;border-left:3px solid var(--teal);padding-left:8px;margin-bottom:10px}
+
+@media (min-width:900px){
+  .post-list{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+  .post-item>a{grid-template-columns:160px 1fr}
+  .post-thumb{aspect-ratio:4/3}
+  .entry h1{font-size:32px}
+  .work-ba{gap:18px;margin:26px 0}
 }

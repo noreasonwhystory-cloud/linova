@@ -1,0 +1,68 @@
+{
+  "key": "group_linova_work",
+  "title": "施工事例フィールド",
+  "fields": [
+    {
+      "key": "field_linova_work_category",
+      "label": "カテゴリ",
+      "name": "work_category",
+      "type": "text",
+      "instructions": "例: 雨漏り修繕 / 外壁補修・塗装工事 / 板金工事 / 大規模改修工事",
+      "required": 0,
+      "placeholder": "例: 雨漏り修繕"
+    },
+    {
+      "key": "field_linova_work_before",
+      "label": "Before画像（施工前）",
+      "name": "before_image",
+      "type": "image",
+      "required": 0,
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_linova_work_after",
+      "label": "After画像（施工後）",
+      "name": "after_image",
+      "type": "image",
+      "required": 0,
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_linova_work_location",
+      "label": "所在地・建物",
+      "name": "location",
+      "type": "text",
+      "required": 0,
+      "placeholder": "例: 名古屋市中区／マンション"
+    },
+    {
+      "key": "field_linova_work_completed",
+      "label": "完工時期",
+      "name": "completed_at",
+      "type": "text",
+      "required": 0,
+      "placeholder": "例: 2024年3月完工"
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "work"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "active": true,
+  "show_in_rest": 0,
+  "modified": 1717545600
+}
