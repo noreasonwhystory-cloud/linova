@@ -34,6 +34,7 @@ $home = home_url('/');
       <div class="about-tx">
         <span class="eyebrow">ABOUT</span>
         <h2 class="display">法人・管理会社様のパートナーとして、確かな品質とスムーズな施工を。</h2>
+        <div class="about-img-m"><img src="<?php echo esc_url($img); ?>/about.png" alt="LINOVA 打ち合わせの様子"></div>
         <p class="lead">LINOVAは、外装・防水・板金・内装・外構など、建物に関するさまざまな課題に対応します。</p>
         <p class="lead">調査・提案から施工管理、アフターフォローまで一貫してサポートし、ご担当者様の負担を軽減します。</p>
       </div>
