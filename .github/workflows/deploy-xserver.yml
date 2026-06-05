@@ -1,8 +1,11 @@
-name: Deploy LINOVA to XServer
+name: Deploy LINOVA theme to XServer
 
 on:
   push:
     branches: [main]
+    paths:
+      - 'wp-theme/**'
+      - '.github/workflows/deploy-xserver.yml'
   workflow_dispatch:
 
 concurrency:
@@ -14,21 +17,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Deploy static site via FTPS to linova-works.com
+      - name: Deploy WP theme via FTPS to linova-works.com
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.XSERVER_FTP_HOST }}
           username: ${{ secrets.XSERVER_FTP_USER }}
           password: ${{ secrets.XSERVER_FTP_PASSWORD }}
-          local-dir: ./
-          server-dir: ./linova-works.com/public_html/
+          local-dir: ./wp-theme/linova/
+          server-dir: ./linova-works.com/public_html/wp-content/themes/linova/
           protocol: ftps
           port: 21
           security: strict
-          exclude: |
-            **/.git*
-            **/.git*/**
-            .github/**
-            .claude/**
-            CLAUDE.md
-            README.md

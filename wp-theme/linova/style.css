@@ -1,3 +1,15 @@
+/*
+Theme Name: LINOVA
+Theme URI: https://linova-works.com/
+Description: 住まいの課題を最適な解決へ。LINOVA 公式サイト カスタムテーマ（施工事例CPT・お知らせ/ブログ・問合せ対応）。
+Author: LINOVA
+Version: 1.0.0
+Requires at least: 6.0
+Tested up to: 7.0
+Requires PHP: 7.4
+Text Domain: linova
+*/
+
 /* ============ LINOVA — responsive (mobile-first) ============ */
 :root{
   --navy:#19293a;
@@ -131,7 +143,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .works{display:flex;flex-direction:column;gap:11px;margin-top:18px;}
 .case{background:#fff;border-radius:13px;overflow:hidden;box-shadow:var(--shadow-soft);border:1px solid var(--border);display:grid;grid-template-columns:1.32fr 1fr;}
 .case-media{position:relative;display:grid;grid-template-columns:1fr 1fr;order:1;background:#e9eef2;}
-.case-media image-slot{width:100%;height:100%;min-height:104px;background:#e9eef2;}
+.case-media image-slot,.case-media img{width:100%;height:100%;min-height:104px;background:#e9eef2;object-fit:cover;}
 .ba-tag{position:absolute;top:8px;font-family:"Montserrat";font-weight:600;font-size:9.5px;letter-spacing:.08em;color:#fff;background:rgba(16,28,40,.66);padding:2px 7px;border-radius:3px;}
 .ba-tag.before{left:8px}
 .ba-tag.after{right:8px}
@@ -160,7 +172,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 
 /* ===== cta ===== */
 .cta{position:relative;overflow:hidden;color:#fff;text-align:center;padding:40px 28px;}
-.cta image-slot{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.cta image-slot,.cta img{position:absolute;inset:0;width:100%;height:100%;z-index:0;object-fit:cover}
 .cta .ov{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(25,41,58,.9),rgba(20,33,47,.92));}
 .cta-in{position:relative;z-index:2}
 .cta h3{font-family:"Noto Serif JP",serif;font-weight:600;font-size:20px;line-height:1.6;}
