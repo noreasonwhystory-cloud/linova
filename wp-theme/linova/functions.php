@@ -145,6 +145,19 @@ add_filter('acf/settings/load_json', function ($paths) {
 });
 
 /**
+ * テーマ画像URL（assets/images/）+ filemtime キャッシュバスト。
+ * 同名差し替えでも即反映。存在しないファイルは空文字（呼び出し側で出し分け可）。
+ */
+function linova_asset_img($file) {
+    $rel = '/assets/images/' . ltrim($file, '/');
+    $abs = get_template_directory() . $rel;
+    if (!file_exists($abs)) {
+        return '';
+    }
+    return get_template_directory_uri() . $rel . '?v=' . filemtime($abs);
+}
+
+/**
  * 施工事例の ACF ヘルパー（ACF未導入でも安全に空を返す）
  */
 function linova_field($name, $post_id = null) {

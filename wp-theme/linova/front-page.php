@@ -92,18 +92,25 @@ $home = home_url('/');
       </div>
       <div class="svc-grid">
         <?php
+        // [写真ファイル, アイコンファイル, タイトル, 説明]
         $services = [
-            ['svc-1-gaiheki.png', '外壁工事', '塗装・補修・張り替えなど、外壁に関する工事全般に対応。'],
-            ['svc-2-bousui.png',  '防水工事', '屋上・バルコニー・ベランダなどの防水工事を行います。'],
-            ['svc-3-bankin.png',  '板金工事', '屋根・雨樋・笠木などの板金工事で建物を雨風から守ります。'],
-            ['svc-4-rousui.png',  '漏水調査', '雨漏りの原因を徹底調査し、最適な修繕方法をご提案。'],
-            ['svc-5-naisou.png',  '内装工事', '天井・壁・床などの内装工事で快適な空間づくりをサポート。'],
-            ['svc-6-gaikou.png',  '外構工事', 'エクステリア・フェンス・駐車場など外構工事にも対応可能。'],
+            ['svc-1-gaiheki.png', 'svc-icon-1.png', '外壁工事', '塗装・補修・張り替えなど、外壁に関する工事全般に対応。'],
+            ['svc-2-bousui.png',  'svc-icon-2.png', '防水工事', '屋上・バルコニー・ベランダなどの防水工事を行います。'],
+            ['svc-3-bankin.png',  'svc-icon-3.png', '板金工事', '屋根・雨樋・笠木などの板金工事で建物を雨風から守ります。'],
+            ['svc-4-rousui.png',  'svc-icon-4.png', '漏水調査', '雨漏りの原因を徹底調査し、最適な修繕方法をご提案。'],
+            ['svc-5-naisou.png',  'svc-icon-5.png', '内装工事', '天井・壁・床などの内装工事で快適な空間づくりをサポート。'],
+            ['svc-6-gaikou.png',  'svc-icon-6.png', '外構工事', 'エクステリア・フェンス・駐車場など外構工事にも対応可能。'],
         ];
-        foreach ($services as $s) : ?>
+        foreach ($services as $s) :
+            $photo = linova_asset_img($s[0]);
+            $icon  = linova_asset_img($s[1]);
+        ?>
           <div class="svc">
-            <div class="svc-media"><img src="<?php echo esc_url($img . '/' . $s[0]); ?>" alt="<?php echo esc_attr($s[1]); ?>"></div>
-            <div class="svc-body"><h3><?php echo esc_html($s[1]); ?></h3><p><?php echo esc_html($s[2]); ?></p><span class="chev"><i data-lucide="chevron-right"></i></span></div>
+            <div class="svc-media">
+              <?php if ($photo) : ?><img src="<?php echo esc_url($photo); ?>" alt="<?php echo esc_attr($s[2]); ?>"><?php endif; ?>
+              <?php if ($icon) : ?><span class="svc-icon"><img src="<?php echo esc_url($icon); ?>" alt=""></span><?php endif; ?>
+            </div>
+            <div class="svc-body"><h3><?php echo esc_html($s[2]); ?></h3><p><?php echo esc_html($s[3]); ?></p><span class="chev"><i data-lucide="chevron-right"></i></span></div>
           </div>
         <?php endforeach; ?>
       </div>
