@@ -408,6 +408,16 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
   .reveal{opacity:1 !important;transform:none !important;transition:none !important;}
 }
 
+/* ============ Contact Form 7 ============ */
+.form-card .wpcf7-form-control-wrap{display:block}
+.form-card .wpcf7 .submit{cursor:pointer;border:0}
+.form-card .wpcf7-not-valid-tip{color:#d33;font-size:12px;margin-top:5px}
+.form-card .wpcf7-response-output{margin:14px 0 0;padding:12px 14px;border-radius:8px;font-size:13px;border:1px solid var(--border)}
+.form-card .wpcf7 form.invalid .wpcf7-response-output,.form-card .wpcf7 form.unaccepted .wpcf7-response-output{border-color:#e7b400;background:#fff8e6;color:#7a5b00}
+.form-card .wpcf7 form.sent .wpcf7-response-output{border-color:#1a7e91;background:var(--teal-pale);color:var(--teal-deep)}
+.form-card .wpcf7-spinner{margin:8px auto 0;display:block}
+.form-card input[aria-invalid="true"],.form-card textarea[aria-invalid="true"]{border-color:#d33}
+
 /* 問合せ メールリンク */
 .cd-mail{display:inline-flex;align-items:center;gap:9px;font-weight:600;font-size:14px;color:var(--ink);width:fit-content;word-break:break-all;}
 .cd-mail svg{width:20px;height:20px;color:var(--teal);flex:0 0 auto}
@@ -446,6 +456,11 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .entry-body img{max-width:100%;height:auto;border-radius:8px;margin:8px 0}
 .entry-body a{color:var(--teal-deep);text-decoration:underline}
 .entry-body ul,.entry-body ol{margin:0 0 16px 1.4em}
+.info-table{width:100%;border-collapse:collapse;font-size:14px;margin-top:6px}
+.info-table th,.info-table td{text-align:left;padding:13px 14px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.7}
+.info-table th{width:34%;white-space:nowrap;color:var(--ink);font-weight:700;background:var(--bg-soft)}
+.info-table td{color:var(--body)}
+.info-table a{color:var(--teal-deep);text-decoration:underline}
 .back-link{display:inline-flex;align-items:center;gap:7px;margin-top:30px;font-weight:700;font-size:13px;color:var(--ink)}
 .back-link svg{width:16px;height:16px;color:var(--teal)}
 

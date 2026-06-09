@@ -16,6 +16,7 @@ $home = home_url('/');
         <a href="<?php echo esc_url($home . '#works'); ?>">施工事例</a>
         <a href="<?php echo esc_url($home . '#strength'); ?>">LINOVAの強み</a>
         <a href="<?php echo esc_url($home . '#area'); ?>">対応エリア</a>
+        <a href="<?php echo esc_url($home . 'company/'); ?>">会社概要</a>
         <a href="<?php echo esc_url($home . '#contact'); ?>">お問い合わせ</a>
         <a href="<?php echo esc_url($home . 'privacy/'); ?>">プライバシーポリシー</a>
       </nav>
