@@ -216,14 +216,25 @@ add_filter('wpcf7_load_css', '__return_false');
  * （トップ問合せフォームに表示する Contact Form 7 のID）
  */
 add_action('admin_init', function () {
-    register_setting('general', 'linova_cf7_form_id', ['sanitize_callback' => 'absint']);
+    register_setting('general', 'linova_cf7_shortcode', ['sanitize_callback' => 'sanitize_text_field']);
 
     add_settings_section('linova_section', 'LINOVAテーマ設定', function () {
-        echo '<p>Contact Form 7 のフォーム編集画面URL末尾 <code>post=NN</code> の数値を入力すると、トップの問い合わせ欄にそのフォームを表示します（0で静的フォールバック）。</p>';
+        echo '<p>トップの問い合わせ欄に表示する Contact Form 7 のショートコードを貼り付け（例 <code>[contact-form-7 id="xxxxxxx" title="お問い合わせ"]</code>）。空欄なら既定フォームを表示。</p>';
     }, 'general');
 
-    add_settings_field('linova_cf7_form_id', 'TOP問合せ CF7 フォームID', function () {
-        $value = (int) get_option('linova_cf7_form_id', 0);
-        printf('<input type="number" name="linova_cf7_form_id" value="%d" min="0" step="1" class="small-text" />', $value);
+    add_settings_field('linova_cf7_shortcode', 'TOP問合せ CF7 ショートコード', function () {
+        $value = (string) get_option('linova_cf7_shortcode', '');
+        printf('<input type="text" name="linova_cf7_shortcode" value="%s" class="large-text" placeholder="[contact-form-7 id=&quot;...&quot;]" />', esc_attr($value));
     }, 'general', 'linova_section');
 });
+
+/**
+ * TOP問合せに表示する CF7 ショートコード（設定優先・無ければ既定）
+ */
+function linova_cf7_shortcode() {
+    $sc = trim((string) get_option('linova_cf7_shortcode', ''));
+    if ($sc === '') {
+        $sc = '[contact-form-7 id="6bfa258" title="お問い合わせ"]';
+    }
+    return $sc;
+}

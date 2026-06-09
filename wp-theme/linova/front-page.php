@@ -284,9 +284,8 @@ $home = home_url('/');
       <div class="form-card">
         <h3>お問い合わせフォーム</h3>
         <?php
-        $cf7_id = (int) get_option('linova_cf7_form_id', 0);
-        if ($cf7_id && function_exists('do_shortcode')) {
-            echo do_shortcode('[contact-form-7 id="' . $cf7_id . '"]');
+        if (shortcode_exists('contact-form-7')) {
+            echo do_shortcode(linova_cf7_shortcode());
         } else {
             // CF7未設定時の静的フォールバック（P4でCF7に置換）
             ?>
