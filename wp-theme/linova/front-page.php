@@ -278,6 +278,7 @@ $home = home_url('/');
         <div class="contact-direct">
           <a class="cd-tel" href="tel:<?php echo esc_attr($p['phone']); ?>"><i data-lucide="phone"></i><span class="col"><b><?php echo esc_html($p['phoneDisplay']); ?></b><small><?php echo esc_html($p['hours']); ?></small></span></a>
           <a class="cd-line" href="<?php echo esc_url($p['lineUrl']); ?>"><span class="line-badge">LINE</span>LINEで相談する</a>
+          <a class="cd-mail" href="mailto:<?php echo esc_attr($p['email']); ?>"><i data-lucide="mail"></i><?php echo esc_html($p['email']); ?></a>
         </div>
       </div>
       <div class="form-card">

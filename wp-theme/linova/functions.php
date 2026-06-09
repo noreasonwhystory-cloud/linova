@@ -21,7 +21,7 @@ function linova_profile() {
         'phoneDisplay'  => '052-xxx-xxxx',          // TODO: 表示用
         'hours'         => '受付 9:00〜18:00',
         'lineUrl'       => '#',                      // TODO: LINE公式URL
-        'email'         => 'info@linova-works.com',  // TODO: 実メール
+        'email'         => 'info@linova-works.com',  // 専用メール（XServerで作成済）
     ];
 }
 

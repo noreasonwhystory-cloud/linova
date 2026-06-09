@@ -408,6 +408,11 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
   .reveal{opacity:1 !important;transform:none !important;transition:none !important;}
 }
 
+/* 問合せ メールリンク */
+.cd-mail{display:inline-flex;align-items:center;gap:9px;font-weight:600;font-size:14px;color:var(--ink);width:fit-content;word-break:break-all;}
+.cd-mail svg{width:20px;height:20px;color:var(--teal);flex:0 0 auto}
+.cd-mail:hover{color:var(--teal-deep)}
+
 /* ============ blog / archive / single (WP) ============ */
 .page-head{margin-bottom:18px}
 .page-head .crumbs{font-size:12px;color:var(--muted);margin-bottom:10px}
