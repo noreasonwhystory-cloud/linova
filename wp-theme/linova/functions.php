@@ -17,10 +17,10 @@ function linova_profile() {
         'siteName'      => 'LINOVA',
         'catchPhrase'   => '住まいの課題を、最適な解決へ。',
         'area'          => ['愛知県', '岐阜県', '三重県'],
-        'phone'         => '052-000-0000',          // TODO: 実電話番号
-        'phoneDisplay'  => '052-xxx-xxxx',          // TODO: 表示用
+        'phone'         => '050-8895-4408',
+        'phoneDisplay'  => '050-8895-4408',
         'hours'         => '受付 9:00〜18:00',
-        'lineUrl'       => '#',                      // TODO: LINE公式URL
+        'lineUrl'       => 'https://lin.ee/ZraOz0f',
         'email'         => 'info@linova-works.com',  // 専用メール（XServerで作成済）
     ];
 }
