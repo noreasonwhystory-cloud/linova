@@ -207,6 +207,20 @@ add_action('wp_head', function () {
 }, 5);
 
 /**
+ * favicon / サイトアイコン（LINOVA マーク）。
+ * カスタマイザーでサイトアイコン未設定の場合に theme の favicon を出力。
+ */
+add_action('wp_head', function () {
+    if (function_exists('has_site_icon') && has_site_icon()) {
+        return; // WP のサイトアイコンを優先
+    }
+    $f = linova_asset_img('favicon.png');
+    if (!$f) return;
+    echo '<link rel="icon" href="' . esc_url($f) . '" sizes="any">' . "\n";
+    echo '<link rel="apple-touch-icon" href="' . esc_url($f) . '">' . "\n";
+}, 6);
+
+/**
  * Contact Form 7: 既定CSSを読み込まない（テーマ側で制御）
  */
 add_filter('wpcf7_load_css', '__return_false');
