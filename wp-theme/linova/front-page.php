@@ -126,7 +126,7 @@ $home = home_url('/');
           <h2 class="sec-title">施工事例</h2>
           <p class="lead">これまでの施工事例の一部をご紹介します。小規模な修繕から大規模改修まで幅広く対応しています。</p>
         </div>
-        <a class="works-link" href="<?php echo esc_url(get_post_type_archive_link('work') ?: '#'); ?>">すべての施工事例を見る <span class="arr">→</span></a>
+        <a class="works-link" href="<?php echo esc_url(get_post_type_archive_link('work') ?: '#'); ?>">ほかの施工事例も見る <span class="arr">→</span></a>
       </div>
       <div class="works">
         <?php
@@ -187,7 +187,7 @@ $home = home_url('/');
         endif; ?>
       </div>
       <?php if ($wq->have_posts()) : ?>
-        <a class="works-more" href="<?php echo esc_url(get_post_type_archive_link('work') ?: '#'); ?>">すべての施工事例を見る <i data-lucide="chevron-right"></i></a>
+        <a class="works-more" href="<?php echo esc_url(get_post_type_archive_link('work') ?: '#'); ?>">ほかの施工事例も見る <i data-lucide="chevron-right"></i></a>
       <?php endif; ?>
     </div>
   </section>
