@@ -15,7 +15,7 @@ define('LINOVA_THEME_VERSION', '1.0.0');
 function linova_profile() {
     return [
         'siteName'      => 'LINOVA',
-        'catchPhrase'   => '住まいの課題を、最適な解決へ。',
+        'catchPhrase'   => '住まいの課題解決をワンストップで',
         'area'          => ['愛知県', '岐阜県', '三重県'],
         'phone'         => '050-8895-4408',
         'phoneDisplay'  => '050-8895-4408',
@@ -41,6 +41,17 @@ function linova_theme_setup() {
     ]);
 }
 add_action('after_setup_theme', 'linova_theme_setup');
+
+/**
+ * トップページの <title> を「LINOVA｜<catchPhrase>」に固定（検索結果タイトル用）
+ */
+add_filter('pre_get_document_title', function ($title) {
+    if (is_front_page() || is_home()) {
+        $p = linova_profile();
+        return $p['siteName'] . '｜' . $p['catchPhrase'];
+    }
+    return $title;
+});
 
 /**
  * CSS / JS 読み込み
