@@ -186,9 +186,7 @@ $home = home_url('/');
           <?php endforeach;
         endif; ?>
       </div>
-      <?php if ($wq->have_posts()) : ?>
-        <a class="works-more" href="<?php echo esc_url(get_post_type_archive_link('work') ?: '#'); ?>">ほかの施工事例も見る <i data-lucide="chevron-right"></i></a>
-      <?php endif; ?>
+      <a class="works-more" href="<?php echo esc_url(get_post_type_archive_link('work') ?: '#'); ?>">ほかの施工事例も見る <i data-lucide="chevron-right"></i></a>
     </div>
   </section>
 

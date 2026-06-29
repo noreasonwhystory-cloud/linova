@@ -145,6 +145,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 /* ===== works ===== */
 .works-link{display:none;}
 .works{display:flex;flex-direction:column;gap:11px;margin-top:18px;}
+.home .case:nth-child(n+4){display:none;} /* トップは最大3件（PC/スマホ共通）。全件は /works/ */
 .case{background:#fff;border-radius:13px;overflow:hidden;box-shadow:var(--shadow-soft);border:1px solid var(--border);display:grid;grid-template-columns:1.32fr 1fr;}
 .case-media{position:relative;display:grid;grid-template-columns:1fr 1fr;order:1;background:#e9eef2;}
 .case-media image-slot,.case-media img{width:100%;height:100%;min-height:104px;background:#e9eef2;object-fit:cover;}
