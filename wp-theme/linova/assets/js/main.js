@@ -28,6 +28,30 @@
   window.addEventListener('resize', onScroll);
   onScroll();
 
+  // FAQ 工事種別フィルタ（/faq/）
+  (function () {
+    var filter = document.querySelector('.faq-filter');
+    if (!filter) return;
+    var items = [].slice.call(document.querySelectorAll('.faq-list .faq-item'));
+    var empty = document.querySelector('.faq-empty');
+    filter.addEventListener('click', function (e) {
+      var btn = e.target.closest('[data-filter]');
+      if (!btn) return;
+      filter.querySelectorAll('.faq-pill').forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      var f = btn.getAttribute('data-filter');
+      var shown = 0;
+      items.forEach(function (it) {
+        var cats = (it.getAttribute('data-cats') || '').split(' ');
+        var hit = (f === '*') || cats.indexOf(f) !== -1;
+        it.classList.toggle('is-hidden', !hit);
+        it.open = false;
+        if (hit) shown++;
+      });
+      if (empty) empty.style.display = shown ? 'none' : 'block';
+    });
+  })();
+
   // scroll-linked fade-in (PC + mobile)
   (function () {
     var groups = [

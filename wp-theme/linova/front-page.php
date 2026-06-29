@@ -274,13 +274,25 @@ $home = home_url('/');
         <h2 class="sec-title">よくあるご質問</h2>
         <p class="lead">LINOVAによくいただくご質問をまとめました。<br>ご不明点がありましたら、お気軽にご相談ください。</p>
       </div>
-      <?php
-      $faqs = linova_faqs();
-      $top  = array_slice($faqs, 0, LINOVA_FAQ_TOP);
-      $rest = max(0, count($faqs) - LINOVA_FAQ_TOP);
-      ?>
       <div class="faq-list">
-        <?php foreach ($top as $faq) linova_faq_item($faq); ?>
+        <?php
+        $fq = new WP_Query([
+            'post_type'      => 'faq',
+            'posts_per_page' => LINOVA_FAQ_TOP,
+            'orderby'        => 'menu_order date',
+            'order'          => 'ASC',
+            'no_found_rows'  => true,
+        ]);
+        if ($fq->have_posts()) :
+            while ($fq->have_posts()) : $fq->the_post();
+                linova_faq_item(get_the_title(), apply_filters('the_content', get_the_content()));
+            endwhile; wp_reset_postdata();
+        else :
+            foreach (array_slice(linova_faqs(), 0, LINOVA_FAQ_TOP) as $faq) {
+                linova_faq_item($faq['q'], wpautop(esc_html($faq['a'])));
+            }
+        endif;
+        ?>
       </div>
       <a class="works-more faq-more" href="<?php echo esc_url($home . 'faq/'); ?>">
         <i data-lucide="help-circle"></i> すべてのご質問を見る <i data-lucide="arrow-right"></i>

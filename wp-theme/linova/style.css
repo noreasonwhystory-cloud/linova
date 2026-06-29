@@ -433,15 +433,25 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .faq-item[open] .faq-chev{transform:rotate(180deg)}
 .faq-a{display:flex;gap:11px;padding:0 16px 18px;align-items:flex-start}
 .faq-a .faq-badge{margin-top:1px}
-.faq-a p{font-size:13.5px;line-height:1.85;color:var(--body);flex:1}
+.faq-at{flex:1;font-size:13.5px;line-height:1.85;color:var(--body)}
+.faq-at p{margin:0 0 10px}
+.faq-at p:last-child{margin-bottom:0}
 .faq-more{margin-top:20px}
 .faq-more svg{color:var(--teal)}
 .faq-note{text-align:center;font-size:12px;color:var(--muted);margin-top:12px}
+
+/* 工事種別フィルタ pills */
+.faq-filter{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:0 0 18px}
+.faq-pill{border:1px solid var(--border);background:#fff;border-radius:999px;padding:8px 16px;font-size:13px;font-weight:700;color:var(--body);cursor:pointer;transition:all .15s ease;white-space:nowrap}
+.faq-pill:hover{border-color:var(--teal);color:var(--teal-deep)}
+.faq-pill.active{background:var(--teal);border-color:var(--teal);color:#fff}
+.faq-item.is-hidden{display:none}
+
 @media (min-width:900px){
   .faq-list{max-width:860px;margin:0 auto}
   .faq-q{font-size:16px;padding:20px 22px}
   .faq-a{padding:0 22px 22px}
-  .faq-a p{font-size:14.5px}
+  .faq-at{font-size:14.5px}
   .faq-more{max-width:520px;margin:28px auto 0}
 }
 

@@ -119,14 +119,63 @@ function linova_register_post_types() {
         'supports'      => ['title', 'editor', 'thumbnail'],
         'show_in_rest'  => true,
     ]);
+
+    // よくあるご質問（title=質問 / 本文=回答）
+    register_post_type('faq', [
+        'labels' => [
+            'name'          => 'よくあるご質問',
+            'singular_name' => 'よくあるご質問',
+            'add_new'       => '新規追加',
+            'add_new_item'  => '新規Q&Aを追加',
+            'edit_item'     => 'Q&Aを編集',
+            'all_items'     => 'Q&A一覧',
+            'menu_name'     => 'よくあるご質問',
+        ],
+        'public'        => true,
+        'has_archive'   => false,
+        'rewrite'       => ['slug' => 'faq-item'],
+        'menu_icon'     => 'dashicons-editor-help',
+        'menu_position' => 6,
+        'supports'      => ['title', 'editor'],
+        'show_in_rest'  => true,
+    ]);
+
+    // 工事種別（FAQフィルタ用タクソノミ）
+    register_taxonomy('faq_cat', 'faq', [
+        'labels' => [
+            'name'          => '工事種別',
+            'singular_name' => '工事種別',
+            'menu_name'     => '工事種別',
+            'add_new_item'  => '工事種別を追加',
+            'all_items'     => '工事種別一覧',
+        ],
+        'public'            => true,
+        'hierarchical'      => true,
+        'show_admin_column' => true,
+        'show_in_rest'      => true,
+        'rewrite'           => ['slug' => 'faq-cat'],
+    ]);
 }
 add_action('init', 'linova_register_post_types');
 
 /**
- * 施工事例(work)はクラシックエディタを使う
+ * 工事種別 初期term（無ければ作成・管理画面で追加変更可）
+ */
+function linova_ensure_faq_terms() {
+    $terms = ['外壁', '屋根・板金', '防水', '漏水調査', '内装', '外構', '設備', '全般'];
+    foreach ($terms as $t) {
+        if (!term_exists($t, 'faq_cat')) {
+            wp_insert_term($t, 'faq_cat');
+        }
+    }
+}
+add_action('init', 'linova_ensure_faq_terms', 11);
+
+/**
+ * 施工事例(work)・FAQはクラシックエディタを使う
  */
 add_filter('use_block_editor_for_post_type', function ($use_block_editor, $post_type) {
-    if ($post_type === 'work') {
+    if (in_array($post_type, ['work', 'faq'], true)) {
         return false;
     }
     return $use_block_editor;
@@ -215,16 +264,49 @@ function linova_faqs() {
 }
 
 /**
- * FAQ アコーディオン1件を出力（front/専用ページ共用）
+ * FAQ アコーディオン1件を出力（front/専用ページ共用）。
+ * $q=質問(plain) / $a_html=回答HTML(サニタイズ済) / $cat_slugs=工事種別slug配列(JSフィルタ用)
  */
-function linova_faq_item($faq, $open = false) {
+function linova_faq_item($q, $a_html, $cat_slugs = []) {
+    $data = $cat_slugs ? ' data-cats="' . esc_attr(implode(' ', $cat_slugs)) . '"' : '';
     printf(
-        '<details class="faq-item"%s><summary class="faq-q"><span class="faq-badge q">Q</span><span class="faq-qt">%s</span><i data-lucide="chevron-down" class="faq-chev"></i></summary><div class="faq-a"><span class="faq-badge a">A</span><p>%s</p></div></details>',
-        $open ? ' open' : '',
-        esc_html($faq['q']),
-        esc_html($faq['a'])
+        '<details class="faq-item"%s><summary class="faq-q"><span class="faq-badge q">Q</span><span class="faq-qt">%s</span><i data-lucide="chevron-down" class="faq-chev"></i></summary><div class="faq-a"><span class="faq-badge a">A</span><div class="faq-at">%s</div></div></details>',
+        $data,
+        esc_html($q),
+        $a_html
     );
 }
+
+/**
+ * 既存10件を faq 投稿として自動生成（冪等・1度だけ）。工事種別も付与。
+ */
+add_action('init', function () {
+    if (get_option('linova_faq_seed_done')) {
+        return;
+    }
+    if (!post_type_exists('faq')) {
+        return; // CPT未登録なら次回
+    }
+    // 既にfaq投稿が1件でもあれば seed しない（手動運用済とみなす）
+    $existing = get_posts(['post_type' => 'faq', 'posts_per_page' => 1, 'fields' => 'ids', 'post_status' => 'any']);
+    if (empty($existing)) {
+        $cat_map = [5 => '内装', 6 => '漏水調査']; // それ以外は全般
+        foreach (linova_faqs() as $i => $faq) {
+            $id = wp_insert_post([
+                'post_type'    => 'faq',
+                'post_status'  => 'publish',
+                'post_title'   => $faq['q'],
+                'post_content' => $faq['a'],
+                'menu_order'   => $i,
+            ]);
+            if ($id && !is_wp_error($id)) {
+                $cat = $cat_map[$i] ?? '全般';
+                wp_set_object_terms($id, $cat, 'faq_cat');
+            }
+        }
+    }
+    update_option('linova_faq_seed_done', 1);
+}, 20);
 
 /**
  * テーマ画像URL（assets/images/）+ filemtime キャッシュバスト。
