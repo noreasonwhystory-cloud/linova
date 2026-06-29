@@ -133,6 +133,35 @@ add_filter('use_block_editor_for_post_type', function ($use_block_editor, $post_
 }, 10, 2);
 
 /**
+ * 「よくあるご質問」固定ページ(slug=faq・テンプレ page-faq.php)を自動生成。
+ * 既存なら何もしない。1度作れば以後はフラグでスキップ。
+ */
+add_action('after_setup_theme', function () {
+    if (get_option('linova_faq_page_done')) {
+        return;
+    }
+    $existing = get_page_by_path('faq');
+    if (!$existing) {
+        $id = wp_insert_post([
+            'post_title'   => 'よくあるご質問',
+            'post_name'    => 'faq',
+            'post_status'  => 'publish',
+            'post_type'    => 'page',
+            'post_content' => '',
+        ]);
+        if ($id && !is_wp_error($id)) {
+            update_post_meta($id, '_wp_page_template', 'page-faq.php');
+        }
+    } else {
+        // 既存ページにテンプレ未割当なら割り当て
+        if (get_post_meta($existing->ID, '_wp_page_template', true) !== 'page-faq.php') {
+            update_post_meta($existing->ID, '_wp_page_template', 'page-faq.php');
+        }
+    }
+    update_option('linova_faq_page_done', 1);
+});
+
+/**
  * 標準投稿のカテゴリ「お知らせ」「ブログ」を用意（無ければ作成）
  */
 function linova_ensure_categories() {
