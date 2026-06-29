@@ -266,6 +266,29 @@ $home = home_url('/');
     </div>
   </section>
 
+  <!-- ===== FAQ ===== -->
+  <section class="section faq-sec" id="faq">
+    <div class="inner">
+      <div class="sec-head" style="text-align:center">
+        <span class="eyebrow">FAQ</span>
+        <h2 class="sec-title">よくあるご質問</h2>
+        <p class="lead">LINOVAによくいただくご質問をまとめました。<br>ご不明点がありましたら、お気軽にご相談ください。</p>
+      </div>
+      <?php
+      $faqs = linova_faqs();
+      $top  = array_slice($faqs, 0, LINOVA_FAQ_TOP);
+      $rest = max(0, count($faqs) - LINOVA_FAQ_TOP);
+      ?>
+      <div class="faq-list">
+        <?php foreach ($top as $i => $faq) linova_faq_item($faq, $i === 0); ?>
+      </div>
+      <a class="works-more faq-more" href="<?php echo esc_url($home . 'faq/'); ?>">
+        <i data-lucide="help-circle"></i> すべてのQ&Aを見る<?php if ($rest) echo '（+' . $rest . '件）'; ?> <i data-lucide="arrow-right"></i>
+      </a>
+      <p class="faq-note">その他のご質問もこちらからご確認いただけます。</p>
+    </div>
+  </section>
+
   <!-- ===== CONTACT ===== -->
   <section class="section soft" id="contact">
     <div class="inner contact-grid">

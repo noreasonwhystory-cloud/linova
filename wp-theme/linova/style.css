@@ -419,6 +419,32 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .form-card .wpcf7-spinner{margin:8px auto 0;display:block}
 .form-card input[aria-invalid="true"],.form-card textarea[aria-invalid="true"]{border-color:#d33}
 
+/* ============ FAQ アコーディオン ============ */
+.faq-sec .sec-head .lead{margin-left:auto;margin-right:auto;max-width:560px}
+.faq-list{display:flex;flex-direction:column;gap:10px;margin-top:4px}
+.faq-item{background:#fff;border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow-soft);overflow:hidden}
+.faq-q{list-style:none;cursor:pointer;display:flex;align-items:center;gap:11px;padding:16px 16px;font-weight:700;font-size:14.5px;color:var(--ink);line-height:1.55}
+.faq-q::-webkit-details-marker{display:none}
+.faq-badge{flex:0 0 auto;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-family:"Montserrat";font-weight:700;font-size:13px;color:#fff}
+.faq-badge.q{background:var(--teal)}
+.faq-badge.a{background:var(--muted)}
+.faq-qt{flex:1}
+.faq-chev{flex:0 0 auto;width:18px;height:18px;color:var(--muted);transition:transform .25s ease}
+.faq-item[open] .faq-chev{transform:rotate(180deg)}
+.faq-a{display:flex;gap:11px;padding:0 16px 18px;align-items:flex-start}
+.faq-a .faq-badge{margin-top:1px}
+.faq-a p{font-size:13.5px;line-height:1.85;color:var(--body);flex:1}
+.faq-more{margin-top:20px}
+.faq-more svg{color:var(--teal)}
+.faq-note{text-align:center;font-size:12px;color:var(--muted);margin-top:12px}
+@media (min-width:900px){
+  .faq-list{max-width:860px;margin:0 auto}
+  .faq-q{font-size:16px;padding:20px 22px}
+  .faq-a{padding:0 22px 22px}
+  .faq-a p{font-size:14.5px}
+  .faq-more{max-width:520px;margin:28px auto 0}
+}
+
 /* 問合せ メールリンク */
 .cd-mail{display:inline-flex;align-items:center;gap:9px;font-weight:600;font-size:14px;color:var(--ink);width:fit-content;word-break:break-all;}
 .cd-mail svg{width:20px;height:20px;color:var(--teal);flex:0 0 auto}

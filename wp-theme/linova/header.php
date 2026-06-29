@@ -25,6 +25,7 @@ $home = home_url('/');
       <a href="<?php echo esc_url($home . '#works'); ?>">施工事例</a>
       <a href="<?php echo esc_url($home . '#strength'); ?>">LINOVAの強み</a>
       <a href="<?php echo esc_url($home . '#area'); ?>">対応エリア</a>
+      <a href="<?php echo esc_url($home . '#faq'); ?>">よくあるご質問</a>
       <a href="<?php echo esc_url($home . '#about'); ?>">会社情報</a>
     </nav>
     <div class="hdr-actions">
@@ -51,6 +52,7 @@ $home = home_url('/');
       <a href="<?php echo esc_url($home . '#works'); ?>" data-nav>施工事例 <span>WORKS</span></a>
       <a href="<?php echo esc_url($home . '#strength'); ?>" data-nav>LINOVAの強み <span>STRENGTH</span></a>
       <a href="<?php echo esc_url($home . '#area'); ?>" data-nav>対応エリア <span>AREA</span></a>
+      <a href="<?php echo esc_url($home . '#faq'); ?>" data-nav>よくあるご質問 <span>FAQ</span></a>
       <a href="<?php echo esc_url($home . '#contact'); ?>" data-nav>お問い合わせ <span>CONTACT</span></a>
     </div>
     <div class="nav-foot">
