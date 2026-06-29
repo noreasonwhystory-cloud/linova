@@ -283,7 +283,7 @@ $home = home_url('/');
         <?php foreach ($top as $faq) linova_faq_item($faq); ?>
       </div>
       <a class="works-more faq-more" href="<?php echo esc_url($home . 'faq/'); ?>">
-        <i data-lucide="help-circle"></i> すべてのQ&Aを見る<?php if ($rest) echo '（+' . $rest . '件）'; ?> <i data-lucide="arrow-right"></i>
+        <i data-lucide="help-circle"></i> すべてのご質問を見る <i data-lucide="arrow-right"></i>
       </a>
       <p class="faq-note">その他のご質問もこちらからご確認いただけます。</p>
     </div>
