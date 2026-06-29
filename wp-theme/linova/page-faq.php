@@ -15,7 +15,7 @@ $home = home_url('/');
       <p class="lead">LINOVAによくいただくご質問をまとめました。ご不明点がありましたら、お気軽にご相談ください。</p>
     </div>
     <div class="faq-list">
-      <?php foreach (linova_faqs() as $i => $faq) linova_faq_item($faq, $i === 0); ?>
+      <?php foreach (linova_faqs() as $faq) linova_faq_item($faq); ?>
     </div>
     <a class="back-link" href="<?php echo esc_url($home); ?>"><i data-lucide="arrow-left"></i> トップへ戻る</a>
   </div>

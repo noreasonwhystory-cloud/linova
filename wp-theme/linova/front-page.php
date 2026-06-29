@@ -280,7 +280,7 @@ $home = home_url('/');
       $rest = max(0, count($faqs) - LINOVA_FAQ_TOP);
       ?>
       <div class="faq-list">
-        <?php foreach ($top as $i => $faq) linova_faq_item($faq, $i === 0); ?>
+        <?php foreach ($top as $faq) linova_faq_item($faq); ?>
       </div>
       <a class="works-more faq-more" href="<?php echo esc_url($home . 'faq/'); ?>">
         <i data-lucide="help-circle"></i> すべてのQ&Aを見る<?php if ($rest) echo '（+' . $rest . '件）'; ?> <i data-lucide="arrow-right"></i>
