@@ -6,11 +6,9 @@ $archive = get_post_type_archive_link('work') ?: $home . '#works';
 ?>
 <?php while (have_posts()) : the_post();
     $cat    = linova_field('work_category');
-    $desc   = linova_field('description');
-    // 本文は1回だけフィルタ適用して使い回す（the_content 多重発火を回避）
-    $raw_content  = get_the_content();
-    $body_html    = trim($raw_content) !== '' ? apply_filters('the_content', $raw_content) : '';
-    if (!$desc) { $desc = wp_trim_words(wp_strip_all_tags($raw_content), 60); } // 抜粋フィルタ再発火を避ける
+    // 本文エディタ = 詳細ページのリード文（1回だけフィルタ適用して使い回す）
+    $raw_content = get_the_content();
+    $lead_html   = trim($raw_content) !== '' ? apply_filters('the_content', $raw_content) : '';
 
     // ギャラリー画像URL配列を組み立て（photo_1..6→無ければ after/before）
     $imgs = [];
@@ -35,7 +33,7 @@ $archive = get_post_type_archive_link('work') ?: $home . '#works';
     $scope     = linova_field('work_scope');
     $period    = linova_field('work_period');
     $location  = linova_field('location');
-    $overview  = trim($raw_content);
+    $overview  = linova_field('overview');
     $challenges = linova_field('challenges');
     $response  = linova_field('response');
     // 「よくあるご質問」(faq CPT)から選択されたQ&Aを引用
@@ -68,7 +66,7 @@ $archive = get_post_type_archive_link('work') ?: $home . '#works';
       <h1 class="cd-title"><?php the_title(); ?></h1>
       <?php if ($cat) : ?><span class="cd-badge"><?php echo esc_html($cat); ?></span><?php endif; ?>
     </div>
-    <?php if ($desc) : ?><p class="cd-desc"><?php echo esc_html($desc); ?></p><?php endif; ?>
+    <?php if ($lead_html) : ?><div class="cd-desc"><?php echo $lead_html; ?></div><?php endif; ?>
   </div>
 
   <!-- gallery -->
@@ -103,7 +101,7 @@ $archive = get_post_type_archive_link('work') ?: $home . '#works';
   <!-- numbered sections -->
   <?php
   $steps = [];
-  if ($overview)   { $steps[] = ['ic' => 'house',       'title' => '工事の概要',   'teal' => false, 'body' => $body_html]; }
+  if ($overview)   { $steps[] = ['ic' => 'house',       'title' => '工事の概要',   'teal' => false, 'body' => wpautop(esc_html($overview))]; }
   if ($challenges) { $steps[] = ['ic' => 'user-round',  'title' => 'お客様の課題', 'teal' => false, 'checks' => preg_split('/\r\n|\r|\n/', trim($challenges))]; }
   if ($response)   { $steps[] = ['ic' => 'handshake',   'title' => 'LINOVAの対応', 'teal' => true,  'body' => wpautop(esc_html($response))]; }
   if ($steps) : ?>

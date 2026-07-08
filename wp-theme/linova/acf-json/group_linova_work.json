@@ -3,58 +3,22 @@
   "title": "施工事例フィールド",
   "fields": [
     {
+      "key": "field_linova_work_leadnote",
+      "label": "",
+      "name": "",
+      "type": "message",
+      "message": "上の本文エディタ＝詳細ページの「リード文（タイトル下の説明文）」になります。工事の詳しい概要は下の『工事の概要』欄に入力してください。",
+      "new_lines": "wpautop",
+      "esc_html": 0
+    },
+    {
       "key": "field_linova_work_category",
       "label": "カテゴリ",
       "name": "work_category",
       "type": "text",
-      "instructions": "例: 雨漏り修繕 / 外壁補修・塗装工事 / 板金工事 / 大規模改修工事",
+      "instructions": "カード等に表示するラベル。例: 雨漏り修繕 / 外壁補修・塗装工事 / 板金工事。※一覧の絞り込みは右サイドの『工事種別』で設定",
       "required": 0,
       "placeholder": "例: 雨漏り修繕"
-    },
-    {
-      "key": "field_linova_work_before",
-      "label": "Before画像（施工前）",
-      "name": "before_image",
-      "type": "image",
-      "required": 0,
-      "return_format": "array",
-      "preview_size": "medium",
-      "library": "all"
-    },
-    {
-      "key": "field_linova_work_after",
-      "label": "After画像（施工後）",
-      "name": "after_image",
-      "type": "image",
-      "required": 0,
-      "return_format": "array",
-      "preview_size": "medium",
-      "library": "all"
-    },
-    {
-      "key": "field_linova_work_location",
-      "label": "所在地・建物",
-      "name": "location",
-      "type": "text",
-      "required": 0,
-      "placeholder": "例: 名古屋市中区／マンション"
-    },
-    {
-      "key": "field_linova_work_completed",
-      "label": "完工時期",
-      "name": "completed_at",
-      "type": "text",
-      "required": 0,
-      "placeholder": "例: 2024年3月完工"
-    },
-    {
-      "key": "field_linova_work_description",
-      "label": "説明（詳細ページのリード文）",
-      "name": "description",
-      "type": "textarea",
-      "required": 0,
-      "rows": 3,
-      "instructions": "詳細ページ上部のタイトル下に表示する概要文"
     },
     {
       "key": "field_linova_work_photo_1",
@@ -134,6 +98,31 @@
       "placeholder": "例: 21日間"
     },
     {
+      "key": "field_linova_work_location",
+      "label": "所在地・建物",
+      "name": "location",
+      "type": "text",
+      "required": 0,
+      "placeholder": "例: 名古屋市中区／マンション"
+    },
+    {
+      "key": "field_linova_work_completed",
+      "label": "完工時期",
+      "name": "completed_at",
+      "type": "text",
+      "required": 0,
+      "placeholder": "例: 2024年3月完工"
+    },
+    {
+      "key": "field_linova_work_overview",
+      "label": "工事の概要",
+      "name": "overview",
+      "type": "textarea",
+      "required": 0,
+      "rows": 4,
+      "instructions": "詳細ページ『01 工事の概要』に表示する本文"
+    },
+    {
       "key": "field_linova_work_challenges",
       "label": "お客様の課題（1行に1項目）",
       "name": "challenges",
@@ -162,6 +151,26 @@
       "return_format": "id",
       "min": 0,
       "instructions": "「よくあるご質問」に登録済みのQ&Aから、この事例ページに表示したいものを選択（複数可・並び順が反映されます）"
+    },
+    {
+      "key": "field_linova_work_before",
+      "label": "Before画像（施工前・一覧/比較用）",
+      "name": "before_image",
+      "type": "image",
+      "required": 0,
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_linova_work_after",
+      "label": "After画像（施工後・カード/一覧用）",
+      "name": "after_image",
+      "type": "image",
+      "required": 0,
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
     }
   ],
   "location": [
@@ -180,5 +189,5 @@
   "instruction_placement": "label",
   "active": true,
   "show_in_rest": 0,
-  "modified": 1751200000
+  "modified": 1751400000
 }
