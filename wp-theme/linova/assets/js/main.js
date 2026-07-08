@@ -28,6 +28,54 @@
   window.addEventListener('resize', onScroll);
   onScroll();
 
+  // 施工事例 一覧ページ (.wl-page) — フィルタ + もっと見る
+  (function () {
+    var grid = document.getElementById('wlGrid');
+    if (!grid) return;
+    var cards = [].slice.call(grid.querySelectorAll('.wl-card'));
+    var chips = [].slice.call(document.querySelectorAll('.wl-chip'));
+    var moreWrap = document.getElementById('wlMore');
+    var moreBtn = document.getElementById('wlMoreBtn');
+    var empty = document.getElementById('wlEmpty');
+    var cat = 'all', expanded = false;
+    var INIT = 6;
+    function matches(c) { return cat === 'all' || (c.dataset.cat || '').split(' ').indexOf(cat) !== -1; }
+    function render() {
+      var shown = cards.filter(matches);
+      cards.forEach(function (c) { c.classList.add('is-hidden'); });
+      var limit = (cat === 'all' && !expanded) ? INIT : shown.length;
+      shown.slice(0, limit).forEach(function (c) { c.classList.remove('is-hidden'); c.classList.add('reveal-in'); });
+      var hasMore = cat === 'all' && !expanded && shown.length > INIT;
+      if (moreWrap) moreWrap.style.display = hasMore ? '' : 'none';
+      if (empty) empty.classList.toggle('show', shown.length === 0);
+    }
+    chips.forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        chips.forEach(function (c) { c.classList.remove('active'); });
+        chip.classList.add('active');
+        cat = chip.dataset.cat; expanded = false;
+        render();
+      });
+    });
+    if (moreBtn) moreBtn.addEventListener('click', function () { expanded = true; render(); });
+    render();
+
+    // reveal
+    var targets = [].slice.call(document.querySelectorAll('.wl-head,.wl-card'));
+    targets.forEach(function (el) { el.classList.add('reveal'); });
+    function reveal() {
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      for (var i = targets.length - 1; i >= 0; i--) {
+        var r = targets[i].getBoundingClientRect();
+        if (r.top < vh * 0.94 && r.bottom > 0) { targets[i].classList.add('reveal-in'); targets.splice(i, 1); }
+      }
+    }
+    requestAnimationFrame(function () { requestAnimationFrame(reveal); });
+    window.addEventListener('scroll', reveal, { passive: true });
+    window.addEventListener('resize', reveal);
+    setTimeout(function () { document.querySelectorAll('.wl-card.reveal').forEach(function (el) { el.classList.add('reveal-in'); }); }, 4500);
+  })();
+
   // 施工事例 詳細ページ (.case-page)
   (function () {
     var page = document.querySelector('.case-page');

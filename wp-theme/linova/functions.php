@@ -140,6 +140,22 @@ function linova_register_post_types() {
         'show_in_rest'  => true,
     ]);
 
+    // 施工事例 工事種別（一覧フィルタ用タクソノミ）
+    register_taxonomy('work_cat', 'work', [
+        'labels' => [
+            'name'          => '工事種別',
+            'singular_name' => '工事種別',
+            'menu_name'     => '工事種別',
+            'add_new_item'  => '工事種別を追加',
+            'all_items'     => '工事種別一覧',
+        ],
+        'public'            => true,
+        'hierarchical'      => true,
+        'show_admin_column' => true,
+        'show_in_rest'      => true,
+        'rewrite'           => ['slug' => 'work-cat'],
+    ]);
+
     // 工事種別（FAQフィルタ用タクソノミ）
     register_taxonomy('faq_cat', 'faq', [
         'labels' => [
@@ -159,7 +175,7 @@ function linova_register_post_types() {
 add_action('init', 'linova_register_post_types');
 
 /**
- * 工事種別 初期term（無ければ作成・管理画面で追加変更可）
+ * FAQ工事種別 初期term（無ければ作成・管理画面で追加変更可）
  */
 function linova_ensure_faq_terms() {
     $terms = ['外壁', '屋根・板金', '防水', '漏水調査', '内装', '外構', '設備', '全般'];
@@ -170,6 +186,23 @@ function linova_ensure_faq_terms() {
     }
 }
 add_action('init', 'linova_ensure_faq_terms', 11);
+
+/**
+ * 施工事例 工事種別 初期term（英語スラッグ・冪等・管理画面で増減可）
+ */
+function linova_ensure_work_terms() {
+    $terms = [
+        '店舗改修' => 'store', '防水' => 'waterproof', '屋根・板金' => 'roof',
+        '外壁' => 'wall', '雨漏り' => 'leak', '大規模改修' => 'large',
+        '内装' => 'interior', '外構' => 'exterior', '設備' => 'facility',
+    ];
+    foreach ($terms as $name => $slug) {
+        if (!term_exists($slug, 'work_cat')) {
+            wp_insert_term($name, 'work_cat', ['slug' => $slug]);
+        }
+    }
+}
+add_action('init', 'linova_ensure_work_terms', 11);
 
 /**
  * 施工事例(work)・FAQはクラシックエディタを使う

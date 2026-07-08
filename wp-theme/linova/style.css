@@ -674,3 +674,54 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
   .cd-faq-a .inner-a{padding:0 22px 22px;}
   .cd-faq-a p{font-size:14px;}
 }
+
+/* ============ 施工事例 一覧ページ (archive-work) ============ */
+.wl-page{padding-top:0;}
+.wl-head{padding:30px 24px 0;}
+.wl-head .lead{margin-top:14px;}
+.wl-filter{display:flex;gap:9px;overflow-x:auto;padding:22px 24px 2px;-ms-overflow-style:none;scrollbar-width:none;}
+.wl-filter::-webkit-scrollbar{display:none;}
+.wl-chip{flex:0 0 auto;border:1px solid var(--border);background:#fff;color:var(--body);border-radius:40px;padding:9px 17px;font-size:13px;font-weight:700;white-space:nowrap;transition:all .18s ease;cursor:pointer;}
+.wl-chip:hover{border-color:var(--teal);color:var(--teal-deep);}
+.wl-chip.active{background:var(--teal);border-color:var(--teal);color:#fff;}
+.wl-grid{padding:22px 24px 0;display:grid;grid-template-columns:1fr;gap:16px;}
+.wl-card{background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--shadow-soft);display:flex;flex-direction:column;transition:transform .2s ease,box-shadow .2s ease;}
+.wl-card:hover{transform:translateY(-3px);box-shadow:var(--shadow);}
+.wl-media{position:relative;aspect-ratio:16/10;background:#e9eef2;overflow:hidden;}
+.wl-media image-slot,.wl-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
+.wl-cat{position:absolute;left:11px;bottom:11px;font-size:11px;font-weight:700;letter-spacing:.02em;color:#fff;background:rgba(16,28,40,.72);padding:4px 11px;border-radius:5px;z-index:2;}
+.wl-new{position:absolute;right:11px;top:11px;font-family:"Montserrat",sans-serif;font-size:10px;font-weight:700;letter-spacing:.08em;color:#fff;background:var(--teal);padding:3px 9px;border-radius:4px;z-index:2;}
+.wl-body{padding:16px 16px 18px;display:flex;flex-direction:column;flex:1;}
+.wl-body h3{font-family:"Noto Serif JP",serif;font-weight:700;font-size:17px;color:var(--navy);line-height:1.5;}
+.wl-body p{font-size:12.5px;color:var(--body);line-height:1.75;margin-top:9px;flex:1;}
+.wl-meta{display:flex;flex-wrap:wrap;gap:7px 14px;margin-top:13px;}
+.wl-meta span{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;color:var(--muted);font-weight:500;}
+.wl-meta svg{width:14px;height:14px;color:var(--teal);}
+.wl-link{margin-top:14px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:700;color:var(--teal-deep);}
+.wl-link .arr{font-family:"Montserrat",sans-serif;}
+.wl-link:hover{gap:11px;}
+.wl-empty{display:none;padding:40px 24px;text-align:center;color:var(--muted);font-size:14px;}
+.wl-empty.show{display:block;}
+.wl-more{margin:26px 24px 0;}
+.wl-more button{width:100%;background:#fff;border:1px solid var(--border);border-radius:11px;padding:16px;display:flex;align-items:center;justify-content:center;gap:8px;font-weight:700;font-size:14px;color:var(--ink);box-shadow:var(--shadow-soft);cursor:pointer;}
+.wl-more button svg{width:17px;height:17px;color:var(--teal);}
+.wl-more button:hover{background:var(--bg-soft);}
+.wl-card.is-hidden{display:none;}
+.wl-page-foot{margin-top:46px;}
+@media (min-width:900px){
+  .wl-head{max-width:1200px;margin:0 auto;padding:64px 64px 0;}
+  .wl-head .eyebrow{font-size:13px;}
+  .wl-head .sec-title{font-size:40px;}
+  .wl-head .lead{font-size:15px;max-width:760px;}
+  .wl-filter{max-width:1200px;margin:0 auto;padding:34px 64px 2px;flex-wrap:wrap;overflow:visible;}
+  .wl-chip{font-size:13.5px;padding:10px 20px;}
+  .wl-grid{max-width:1200px;margin:0 auto;padding:34px 64px 0;grid-template-columns:repeat(3,1fr);gap:30px;}
+  .wl-body{padding:20px 20px 22px;}
+  .wl-body h3{font-size:19px;}
+  .wl-body p{font-size:13px;}
+  .wl-more{max-width:420px;margin:48px auto 0;}
+  .wl-page-foot{margin-top:88px;}
+}
+@media (min-width:600px) and (max-width:899px){
+  .wl-grid{grid-template-columns:1fr 1fr;gap:18px;}
+}
