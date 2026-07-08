@@ -28,6 +28,66 @@
   window.addEventListener('resize', onScroll);
   onScroll();
 
+  // 施工事例 詳細ページ (.case-page)
+  (function () {
+    var page = document.querySelector('.case-page');
+    if (!page) return;
+
+    // ギャラリー: サムネ slider + メイン差し替え
+    var track = document.getElementById('galTrack');
+    var main = document.getElementById('galMain');
+    if (track) {
+      var prev = document.getElementById('galPrev');
+      var next = document.getElementById('galNext');
+      var thumbs = [].slice.call(track.querySelectorAll('.gal-thumb'));
+      function pageW() { return Math.max(track.clientWidth * 0.8, 120); }
+      function update() {
+        var max = track.scrollWidth - track.clientWidth - 2;
+        if (prev) prev.disabled = track.scrollLeft <= 2;
+        if (next) next.disabled = track.scrollLeft >= max;
+      }
+      if (prev) prev.onclick = function () { track.scrollLeft -= pageW(); };
+      if (next) next.onclick = function () { track.scrollLeft += pageW(); };
+      track.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+      thumbs.forEach(function (t) {
+        t.addEventListener('click', function () {
+          thumbs.forEach(function (x) { x.classList.remove('active'); });
+          t.classList.add('active');
+          var im = t.querySelector('img');
+          if (im && main) { main.src = im.src; main.alt = im.alt; }
+        });
+      });
+      if (thumbs[0]) thumbs[0].classList.add('active');
+    }
+
+    // ケース別 FAQ アコーディオン
+    page.querySelectorAll('.cd-faq .cd-faq-q').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var faq = btn.closest('.cd-faq');
+        var ans = faq.querySelector('.cd-faq-a');
+        var open = faq.classList.toggle('open');
+        ans.style.maxHeight = open ? (ans.scrollHeight + 'px') : '0px';
+      });
+    });
+
+    // reveal
+    var targets = [].slice.call(page.querySelectorAll('.cd-gallery,.cd-head,.cd-meta .m,.cstep,.cd-faq'));
+    targets.forEach(function (el) { el.classList.add('reveal'); });
+    function reveal() {
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      for (var i = targets.length - 1; i >= 0; i--) {
+        var r = targets[i].getBoundingClientRect();
+        if (r.top < vh * 0.92 && r.bottom > 0) { targets[i].classList.add('reveal-in'); targets.splice(i, 1); }
+      }
+    }
+    requestAnimationFrame(function () { requestAnimationFrame(reveal); });
+    window.addEventListener('scroll', reveal, { passive: true });
+    window.addEventListener('resize', reveal);
+    setTimeout(function () { page.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('reveal-in'); }); }, 4500);
+  })();
+
   // 最新の解決事例 carousel
   (function () {
     var track = document.getElementById('solTrack');

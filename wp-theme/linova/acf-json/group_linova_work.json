@@ -46,6 +46,154 @@
       "type": "text",
       "required": 0,
       "placeholder": "例: 2024年3月完工"
+    },
+    {
+      "key": "field_linova_work_description",
+      "label": "説明（詳細ページのリード文）",
+      "name": "description",
+      "type": "textarea",
+      "required": 0,
+      "rows": 3,
+      "instructions": "詳細ページ上部のタイトル下に表示する概要文"
+    },
+    {
+      "key": "field_linova_work_photo_1",
+      "label": "ギャラリー写真1（メイン）",
+      "name": "photo_1",
+      "type": "image",
+      "required": 0,
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all",
+      "instructions": "詳細ページのメイン写真。空の場合はAfter/Before画像を使用"
+    },
+    {
+      "key": "field_linova_work_photo_2",
+      "label": "ギャラリー写真2",
+      "name": "photo_2",
+      "type": "image",
+      "required": 0,
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_linova_work_photo_3",
+      "label": "ギャラリー写真3",
+      "name": "photo_3",
+      "type": "image",
+      "required": 0,
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_linova_work_photo_4",
+      "label": "ギャラリー写真4",
+      "name": "photo_4",
+      "type": "image",
+      "required": 0,
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_linova_work_photo_5",
+      "label": "ギャラリー写真5",
+      "name": "photo_5",
+      "type": "image",
+      "required": 0,
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_linova_work_photo_6",
+      "label": "ギャラリー写真6",
+      "name": "photo_6",
+      "type": "image",
+      "required": 0,
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_linova_work_scope",
+      "label": "工事内容",
+      "name": "work_scope",
+      "type": "text",
+      "required": 0,
+      "placeholder": "例: 外装・内装・設備工事"
+    },
+    {
+      "key": "field_linova_work_period",
+      "label": "工事期間",
+      "name": "work_period",
+      "type": "text",
+      "required": 0,
+      "placeholder": "例: 21日間"
+    },
+    {
+      "key": "field_linova_work_challenges",
+      "label": "お客様の課題（1行に1項目）",
+      "name": "challenges",
+      "type": "textarea",
+      "required": 0,
+      "rows": 4,
+      "instructions": "改行区切りでチェックリストとして表示されます"
+    },
+    {
+      "key": "field_linova_work_response",
+      "label": "LINOVAの対応",
+      "name": "response",
+      "type": "textarea",
+      "required": 0,
+      "rows": 3
+    },
+    {
+      "key": "field_linova_work_faq1_q",
+      "label": "この事例のFAQ 1・質問",
+      "name": "faq1_q",
+      "type": "text",
+      "required": 0
+    },
+    {
+      "key": "field_linova_work_faq1_a",
+      "label": "この事例のFAQ 1・回答",
+      "name": "faq1_a",
+      "type": "textarea",
+      "required": 0,
+      "rows": 3
+    },
+    {
+      "key": "field_linova_work_faq2_q",
+      "label": "この事例のFAQ 2・質問",
+      "name": "faq2_q",
+      "type": "text",
+      "required": 0
+    },
+    {
+      "key": "field_linova_work_faq2_a",
+      "label": "この事例のFAQ 2・回答",
+      "name": "faq2_a",
+      "type": "textarea",
+      "required": 0,
+      "rows": 3
+    },
+    {
+      "key": "field_linova_work_faq3_q",
+      "label": "この事例のFAQ 3・質問",
+      "name": "faq3_q",
+      "type": "text",
+      "required": 0
+    },
+    {
+      "key": "field_linova_work_faq3_a",
+      "label": "この事例のFAQ 3・回答",
+      "name": "faq3_a",
+      "type": "textarea",
+      "required": 0,
+      "rows": 3
     }
   ],
   "location": [
@@ -64,5 +212,5 @@
   "instruction_placement": "label",
   "active": true,
   "show_in_rest": 0,
-  "modified": 1717545600
+  "modified": 1751000000
 }
