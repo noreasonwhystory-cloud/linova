@@ -141,9 +141,7 @@ $home = home_url('/');
           ]);
           if ($sq->have_posts()) :
               while ($sq->have_posts()) : $sq->the_post();
-                  $after = linova_field('after_image');
-                  $img_url = is_array($after) ? ($after['sizes']['large'] ?? $after['url'] ?? '') : ($after ?: '');
-                  if (!$img_url && has_post_thumbnail()) { $img_url = get_the_post_thumbnail_url(null, 'large'); }
+                  $img_url = linova_card_image();
                   ?>
                   <article class="sol-card">
                     <div class="sol-media">

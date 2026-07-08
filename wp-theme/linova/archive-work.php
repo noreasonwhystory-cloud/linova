@@ -41,9 +41,7 @@ $new_threshold = strtotime('-30 days', current_time('timestamp'));
         while ($wq->have_posts()) : $wq->the_post();
             $terms = get_the_terms(get_the_ID(), 'work_cat');
             $slugs = (!is_wp_error($terms) && $terms) ? wp_list_pluck($terms, 'slug') : [];
-            $after = linova_field('after_image');
-            $img_url = is_array($after) ? ($after['sizes']['large'] ?? $after['url'] ?? '') : ($after ?: '');
-            if (!$img_url && has_post_thumbnail()) { $img_url = get_the_post_thumbnail_url(null, 'large'); }
+            $img_url = linova_card_image();
             $label = linova_field('work_category');
             if (!$label && !is_wp_error($terms) && $terms) { $label = $terms[0]->name; }
             $is_new = get_the_time('U') >= $new_threshold;

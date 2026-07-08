@@ -364,6 +364,20 @@ function linova_asset_img($file) {
 }
 
 /**
+ * 施工事例カード/一覧のサムネ画像URL。
+ * ギャラリー写真1(photo_1) を最優先 → After画像 → アイキャッチ。
+ */
+function linova_card_image($post_id = null) {
+    foreach (['photo_1', 'after_image'] as $f) {
+        $v = linova_field($f, $post_id);
+        $u = is_array($v) ? ($v['sizes']['large'] ?? $v['url'] ?? '') : ($v ?: '');
+        if ($u) return $u;
+    }
+    if (has_post_thumbnail($post_id)) return get_the_post_thumbnail_url($post_id, 'large');
+    return '';
+}
+
+/**
  * 施工事例の ACF ヘルパー（ACF未導入でも安全に空を返す）
  */
 function linova_field($name, $post_id = null) {
