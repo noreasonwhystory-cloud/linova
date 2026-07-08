@@ -639,6 +639,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .cd-faq-a .inner-a{display:grid;grid-template-columns:auto 1fr;gap:12px;padding:0 16px 18px;}
 .cd-faq-a .a-badge{width:26px;height:26px;border-radius:50%;background:var(--bg-soft);color:var(--teal-deep);font-family:"Montserrat";font-weight:700;font-size:13px;display:grid;place-items:center;}
 .cd-faq-a p{font-size:13px;color:var(--body);line-height:1.85;}
+.cd-faq-more{margin-top:22px;}
+@media (min-width:900px){.cd-faq-more{max-width:420px;margin:32px auto 0;}}
 
 @media (min-width:900px){
   .case-page .crumb{display:flex;max-width:1000px;margin:0 auto;padding:26px 40px 0;font-size:13px;}

@@ -141,6 +141,7 @@ $archive = get_post_type_archive_link('work') ?: $home . '#works';
           </div>
         <?php endforeach; ?>
       </div>
+      <a class="works-more cd-faq-more" href="<?php echo esc_url($home . 'faq/'); ?>">よくあるご質問をすべて見る <i data-lucide="arrow-right"></i></a>
     </section>
   <?php endif; ?>
 
