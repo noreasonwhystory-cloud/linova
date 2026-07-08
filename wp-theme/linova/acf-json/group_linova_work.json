@@ -151,49 +151,17 @@
       "rows": 3
     },
     {
-      "key": "field_linova_work_faq1_q",
-      "label": "この事例のFAQ 1・質問",
-      "name": "faq1_q",
-      "type": "text",
-      "required": 0
-    },
-    {
-      "key": "field_linova_work_faq1_a",
-      "label": "この事例のFAQ 1・回答",
-      "name": "faq1_a",
-      "type": "textarea",
+      "key": "field_linova_work_faq_refs",
+      "label": "この事例のよくあるご質問（FAQから選択）",
+      "name": "case_faq_refs",
+      "type": "relationship",
       "required": 0,
-      "rows": 3
-    },
-    {
-      "key": "field_linova_work_faq2_q",
-      "label": "この事例のFAQ 2・質問",
-      "name": "faq2_q",
-      "type": "text",
-      "required": 0
-    },
-    {
-      "key": "field_linova_work_faq2_a",
-      "label": "この事例のFAQ 2・回答",
-      "name": "faq2_a",
-      "type": "textarea",
-      "required": 0,
-      "rows": 3
-    },
-    {
-      "key": "field_linova_work_faq3_q",
-      "label": "この事例のFAQ 3・質問",
-      "name": "faq3_q",
-      "type": "text",
-      "required": 0
-    },
-    {
-      "key": "field_linova_work_faq3_a",
-      "label": "この事例のFAQ 3・回答",
-      "name": "faq3_a",
-      "type": "textarea",
-      "required": 0,
-      "rows": 3
+      "post_type": ["faq"],
+      "taxonomy": "",
+      "filters": ["search", "taxonomy"],
+      "return_format": "id",
+      "min": 0,
+      "instructions": "「よくあるご質問」に登録済みのQ&Aから、この事例ページに表示したいものを選択（複数可・並び順が反映されます）"
     }
   ],
   "location": [
@@ -212,5 +180,5 @@
   "instruction_placement": "label",
   "active": true,
   "show_in_rest": 0,
-  "modified": 1751000000
+  "modified": 1751200000
 }

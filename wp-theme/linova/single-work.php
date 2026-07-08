@@ -35,11 +35,19 @@ $archive = get_post_type_archive_link('work') ?: $home . '#works';
     $overview  = trim(get_the_content());
     $challenges = linova_field('challenges');
     $response  = linova_field('response');
+    // 「よくあるご質問」(faq CPT)から選択されたQ&Aを引用
     $case_faqs = [];
-    for ($n = 1; $n <= 3; $n++) {
-        $q = linova_field('faq' . $n . '_q');
-        $a = linova_field('faq' . $n . '_a');
-        if ($q) { $case_faqs[] = ['q' => $q, 'a' => $a]; }
+    $refs = linova_field('case_faq_refs');
+    if (is_array($refs)) {
+        foreach ($refs as $rid) {
+            $rid = is_object($rid) ? $rid->ID : (is_array($rid) ? ($rid['ID'] ?? 0) : (int) $rid);
+            if ($rid && get_post_status($rid) === 'publish') {
+                $case_faqs[] = [
+                    'q' => get_the_title($rid),
+                    'a' => apply_filters('the_content', get_post_field('post_content', $rid)),
+                ];
+            }
+        }
     }
 ?>
 <main class="case-page">
@@ -128,7 +136,7 @@ $archive = get_post_type_archive_link('work') ?: $home . '#works';
               <span class="qt"><?php echo esc_html($f['q']); ?></span>
               <span class="chev"><i data-lucide="chevron-down"></i></span>
             </button>
-            <div class="cd-faq-a"><div class="inner-a"><span class="a-badge">A</span><p><?php echo nl2br(esc_html($f['a'])); ?></p></div></div>
+            <div class="cd-faq-a"><div class="inner-a"><span class="a-badge">A</span><div class="cd-faq-atext"><?php echo wp_kses_post($f['a']); ?></div></div></div>
           </div>
         <?php endforeach; ?>
       </div>
