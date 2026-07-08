@@ -126,7 +126,6 @@ $home = home_url('/');
           <h2 class="sec-title">最新の解決事例</h2>
           <p class="lead">建物のあらゆる課題に、迅速・丁寧に対応します。</p>
         </div>
-        <a class="sol-seeall" href="<?php echo esc_url(get_post_type_archive_link('work') ?: $home . '#works'); ?>">すべて見る <span class="arr">→</span></a>
       </div>
 
       <div class="sol-wrap">
@@ -186,6 +185,7 @@ $home = home_url('/');
         <button class="sol-arrow next" id="solNext" aria-label="次へ"><i data-lucide="chevron-right"></i></button>
       </div>
       <div class="sol-dots" id="solDots"></div>
+      <a class="works-more sol-more" href="<?php echo esc_url(get_post_type_archive_link('work') ?: $home . '#works'); ?>">すべての施工事例を見る <i data-lucide="arrow-right"></i></a>
     </div>
   </section>
 
