@@ -117,6 +117,78 @@ $home = home_url('/');
     </div>
   </section>
 
+  <!-- ===== 最新の解決事例 ===== -->
+  <section class="section" id="solutions">
+    <div class="inner">
+      <div class="sec-head sol-head">
+        <div class="sol-titles">
+          <span class="eyebrow">NEW</span>
+          <h2 class="sec-title">最新の解決事例</h2>
+          <p class="lead">建物のあらゆる課題に、迅速・丁寧に対応します。</p>
+        </div>
+        <a class="sol-seeall" href="<?php echo esc_url(get_post_type_archive_link('work') ?: $home . '#works'); ?>">すべて見る <span class="arr">→</span></a>
+      </div>
+
+      <div class="sol-wrap">
+        <button class="sol-arrow prev" id="solPrev" aria-label="前へ"><i data-lucide="chevron-left"></i></button>
+        <div class="sol-track" id="solTrack">
+          <?php
+          $sq = new WP_Query([
+              'post_type'      => 'work',
+              'posts_per_page' => 8,
+              'orderby'        => 'date',
+              'order'          => 'DESC',
+              'no_found_rows'  => true,
+          ]);
+          if ($sq->have_posts()) :
+              while ($sq->have_posts()) : $sq->the_post();
+                  $after = linova_field('after_image');
+                  $img_url = is_array($after) ? ($after['sizes']['large'] ?? $after['url'] ?? '') : ($after ?: '');
+                  if (!$img_url && has_post_thumbnail()) { $img_url = get_the_post_thumbnail_url(null, 'large'); }
+                  ?>
+                  <article class="sol-card">
+                    <div class="sol-media">
+                      <?php if ($img_url) : ?><img src="<?php echo esc_url($img_url); ?>" alt="<?php echo esc_attr(get_the_title()); ?>"><?php endif; ?>
+                      <?php if ($cat = linova_field('work_category')) : ?><span class="sol-cat"><?php echo esc_html($cat); ?></span><?php endif; ?>
+                    </div>
+                    <div class="sol-body">
+                      <h3><?php the_title(); ?></h3>
+                      <p><?php echo esc_html(wp_trim_words(get_the_excerpt(), 40)); ?></p>
+                      <a class="sol-link" href="<?php the_permalink(); ?>">詳しく見る <span class="arr">→</span></a>
+                    </div>
+                  </article>
+                  <?php
+              endwhile; wp_reset_postdata();
+          else :
+              // work 投稿が無い間のフォールバック（提供の4カード）
+              $sol_fallback = [
+                  ['case-1-after.png', '店舗改修工事',   '飲食店改修工事',       '店舗リニューアルに伴う外装・内装・設備工事を一括対応。'],
+                  ['case-2-after.png', '防水工事',       '屋上ウレタン防水工事', '屋上の防水層の劣化を解消し、長期的に安心できる防水性能を確保。'],
+                  ['case-3-after.png', '屋根工事',       '屋根カバー工法工事',   '既存の屋根材を活かしたカバー工法で、雨漏りを解消し屋根の寿命を延ばす。'],
+                  ['case-4-after.png', '外壁塗装工事',   '外壁塗装工事',         '外壁の劣化を補修し、美観と耐久性を向上。資産価値を守ります。'],
+              ];
+              $sol_link = get_post_type_archive_link('work') ?: $home . '#works';
+              foreach ($sol_fallback as $c) : ?>
+                <article class="sol-card">
+                  <div class="sol-media">
+                    <img src="<?php echo esc_url(linova_asset_img($c[0])); ?>" alt="<?php echo esc_attr($c[2]); ?>">
+                    <span class="sol-cat"><?php echo esc_html($c[1]); ?></span>
+                  </div>
+                  <div class="sol-body">
+                    <h3><?php echo esc_html($c[2]); ?></h3>
+                    <p><?php echo esc_html($c[3]); ?></p>
+                    <a class="sol-link" href="<?php echo esc_url($sol_link); ?>">詳しく見る <span class="arr">→</span></a>
+                  </div>
+                </article>
+              <?php endforeach;
+          endif; ?>
+        </div>
+        <button class="sol-arrow next" id="solNext" aria-label="次へ"><i data-lucide="chevron-right"></i></button>
+      </div>
+      <div class="sol-dots" id="solDots"></div>
+    </div>
+  </section>
+
   <!-- ===== WORKS ===== -->
   <section class="section" id="works">
     <div class="inner">
@@ -126,7 +198,6 @@ $home = home_url('/');
           <h2 class="sec-title">施工事例</h2>
           <p class="lead">これまでの施工事例の一部をご紹介します。小規模な修繕から大規模改修まで幅広く対応しています。</p>
         </div>
-        <a class="works-link" href="<?php echo esc_url(get_post_type_archive_link('work') ?: '#'); ?>">ほかの施工事例も見る <span class="arr">→</span></a>
       </div>
       <div class="works">
         <?php
@@ -186,7 +257,6 @@ $home = home_url('/');
           <?php endforeach;
         endif; ?>
       </div>
-      <a class="works-more" href="<?php echo esc_url(get_post_type_archive_link('work') ?: '#'); ?>">ほかの施工事例も見る <i data-lucide="chevron-right"></i></a>
     </div>
   </section>
 

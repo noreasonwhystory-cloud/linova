@@ -419,6 +419,54 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .form-card .wpcf7-spinner{margin:8px auto 0;display:block}
 .form-card input[aria-invalid="true"],.form-card textarea[aria-invalid="true"]{border-color:#d33}
 
+/* ===== 最新の解決事例 ===== */
+.sol-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;}
+.sol-head .sol-titles .lead{margin-top:12px;}
+.sol-seeall{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:700;color:var(--muted);white-space:nowrap;margin-top:6px;}
+.sol-seeall:hover{color:var(--teal-deep);}
+.sol-wrap{position:relative;margin-top:22px;}
+.sol-track{display:grid;grid-auto-flow:column;grid-auto-columns:78%;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;-ms-overflow-style:none;scrollbar-width:none;padding:2px;margin:-2px;}
+.sol-track::-webkit-scrollbar{display:none;}
+.sol-card{scroll-snap-align:start;background:#fff;border:1px solid var(--border);border-radius:13px;overflow:hidden;box-shadow:var(--shadow-soft);display:flex;flex-direction:column;transition:transform .2s ease,box-shadow .2s ease;}
+.sol-card:hover{transform:translateY(-3px);box-shadow:var(--shadow);}
+.sol-media{position:relative;aspect-ratio:1/.74;background:#e9eef2;}
+.sol-media image-slot,.sol-media img{width:100%;height:100%;object-fit:cover;display:block;}
+.sol-cat{position:absolute;left:10px;bottom:10px;font-size:11px;font-weight:700;letter-spacing:.02em;color:#fff;background:rgba(16,28,40,.7);padding:4px 10px;border-radius:5px;}
+.sol-body{padding:14px 14px 16px;display:flex;flex-direction:column;flex:1;}
+.sol-body h3{font-weight:700;font-size:16px;color:var(--ink);line-height:1.45;}
+.sol-body p{font-size:12px;color:var(--body);line-height:1.7;margin-top:8px;flex:1;}
+.sol-link{margin-top:14px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:700;color:var(--teal-deep);}
+.sol-link .arr{font-family:"Montserrat",sans-serif;}
+.sol-link:hover{gap:11px;}
+.sol-arrow{position:absolute;top:27%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;background:#fff;border:1px solid var(--border);box-shadow:0 5px 16px rgba(25,41,58,.18);display:grid;place-items:center;color:var(--navy);z-index:4;transition:opacity .2s ease,background .2s ease;}
+.sol-arrow:hover{background:var(--bg-soft);}
+.sol-arrow svg{width:20px;height:20px;}
+.sol-arrow.prev{left:-4px;}
+.sol-arrow.next{right:-4px;}
+.sol-arrow[disabled]{opacity:0;pointer-events:none;}
+.sol-dots{display:flex;justify-content:center;gap:7px;margin-top:18px;}
+.sol-dots button{width:7px;height:7px;border-radius:50%;background:#cfd8e0;transition:background .2s ease,width .2s ease;}
+.sol-dots button.active{background:var(--teal);width:20px;border-radius:4px;}
+
+@media (min-width:640px){
+  .sol-track{grid-auto-columns:calc((100% - 28px)/2);}
+}
+@media (min-width:900px){
+  .sol-head .sol-titles .lead{margin-top:14px;}
+  .sol-seeall{font-size:14px;border-bottom:1px solid var(--muted);padding-bottom:5px;margin-top:8px;}
+  .sol-seeall:hover{border-color:var(--teal-deep);}
+  .sol-wrap{margin-top:36px;}
+  .sol-track{grid-auto-columns:calc((100% - 3*24px)/4);gap:24px;}
+  .sol-arrow{width:44px;height:44px;top:26%;}
+  .sol-arrow svg{width:22px;height:22px;}
+  .sol-arrow.prev{left:-22px;}
+  .sol-arrow.next{right:-22px;}
+  .sol-body{padding:18px 18px 20px;}
+  .sol-body h3{font-size:18px;}
+  .sol-body p{font-size:12.5px;}
+  .sol-dots{display:none;}
+}
+
 /* ============ FAQ アコーディオン ============ */
 .faq-sec .sec-head .lead{margin-left:auto;margin-right:auto;max-width:560px}
 .faq-list{display:flex;flex-direction:column;gap:10px;margin-top:4px}

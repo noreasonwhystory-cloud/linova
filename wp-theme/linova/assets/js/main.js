@@ -28,6 +28,40 @@
   window.addEventListener('resize', onScroll);
   onScroll();
 
+  // 最新の解決事例 carousel
+  (function () {
+    var track = document.getElementById('solTrack');
+    var prev = document.getElementById('solPrev');
+    var next = document.getElementById('solNext');
+    var dotsWrap = document.getElementById('solDots');
+    if (!track) return;
+    var cards = [].slice.call(track.children);
+    cards.forEach(function (c, i) {
+      var b = document.createElement('button');
+      b.setAttribute('aria-label', (i + 1) + '枚目');
+      b.onclick = function () { track.scrollTo({ left: c.offsetLeft - track.offsetLeft, behavior: 'smooth' }); };
+      dotsWrap.appendChild(b);
+    });
+    var dots = [].slice.call(dotsWrap.children);
+    function step() { return track.clientWidth * 0.82; }
+    if (prev) prev.onclick = function () { track.scrollBy({ left: -step(), behavior: 'smooth' }); };
+    if (next) next.onclick = function () { track.scrollBy({ left: step(), behavior: 'smooth' }); };
+    function update() {
+      var max = track.scrollWidth - track.clientWidth - 2;
+      if (prev) prev.disabled = track.scrollLeft <= 2;
+      if (next) next.disabled = track.scrollLeft >= max;
+      var idx = 0, best = 1e9;
+      cards.forEach(function (c, i) {
+        var d = Math.abs(c.offsetLeft - track.offsetLeft - track.scrollLeft);
+        if (d < best) { best = d; idx = i; }
+      });
+      dots.forEach(function (d, i) { d.classList.toggle('active', i === idx); });
+    }
+    track.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  })();
+
   // FAQ 工事種別フィルタ（/faq/）
   (function () {
     var filter = document.querySelector('.faq-filter');
