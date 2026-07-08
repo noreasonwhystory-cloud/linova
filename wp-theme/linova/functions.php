@@ -451,6 +451,27 @@ add_action('save_post_work', function ($post_id) {
 }, 20);
 
 /**
+ * 施工事例 保存時: スラッグが日本語/非ASCIIなら work-<ID> の番号スラッグに置換。
+ * （日本語スラッグはURLエンコードされ長く可読性が低いため）
+ */
+add_action('save_post_work', function ($post_id, $post) {
+    if (wp_is_post_revision($post_id) || (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)) return;
+    if (in_array($post->post_status, ['auto-draft', 'trash'], true)) return;
+    static $running = false;
+    if ($running) return;
+    $slug = $post->post_name;
+    // 非ASCII含む or 空 or URLエンコード(%xx)なら番号スラッグへ
+    if ($slug === '' || preg_match('/[^\x20-\x7E]/', $slug) || strpos($slug, '%') !== false) {
+        $desired = 'work-' . $post_id;
+        if ($slug !== $desired) {
+            $running = true;
+            wp_update_post(['ID' => $post_id, 'post_name' => $desired]);
+            $running = false;
+        }
+    }
+}, 25, 2);
+
+/**
  * テーマ有効化時: CPT/タクソノミを登録してから rewrite ルールをフラッシュ。
  * 有効化直後の /works/・アーカイブ404を防ぐ。
  */
