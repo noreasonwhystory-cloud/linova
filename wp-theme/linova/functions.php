@@ -76,11 +76,12 @@ function linova_enqueue_assets() {
     );
 
     // Lucide アイコン（CDN）
+    // バージョン固定（@latest だと破壊的変更でアイコン全崩壊リスク）
     wp_enqueue_script(
         'lucide',
-        'https://unpkg.com/lucide@latest/dist/umd/lucide.min.js',
+        'https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js',
         [],
-        null,
+        '0.460.0',
         true
     );
 
@@ -131,13 +132,17 @@ function linova_register_post_types() {
             'all_items'     => 'Q&A一覧',
             'menu_name'     => 'よくあるご質問',
         ],
-        'public'        => true,
-        'has_archive'   => false,
-        'rewrite'       => ['slug' => 'faq-item'],
-        'menu_icon'     => 'dashicons-editor-help',
-        'menu_position' => 6,
-        'supports'      => ['title', 'editor'],
-        'show_in_rest'  => true,
+        'public'             => false,
+        'show_ui'            => true,
+        'show_in_menu'       => true,
+        'publicly_queryable' => false,
+        'exclude_from_search' => true,
+        'has_archive'        => false,
+        'rewrite'            => false,
+        'menu_icon'          => 'dashicons-editor-help',
+        'menu_position'      => 6,
+        'supports'           => ['title', 'editor'],
+        'show_in_rest'       => true,
     ]);
 
     // 施工事例 工事種別（一覧フィルタ用タクソノミ）
@@ -320,10 +325,14 @@ add_action('init', function () {
     if (!post_type_exists('faq')) {
         return; // CPT未登録なら次回
     }
+    // 原子ロック（add_optionは既存キーで false）→ 初回同時アクセスの重複seed防止
+    if (!add_option('linova_faq_seed_lock', 1, '', 'no')) {
+        return;
+    }
     // 既にfaq投稿が1件でもあれば seed しない（手動運用済とみなす）
     $existing = get_posts(['post_type' => 'faq', 'posts_per_page' => 1, 'fields' => 'ids', 'post_status' => 'any']);
     if (empty($existing)) {
-        $cat_map = [5 => '内装', 6 => '漏水調査']; // それ以外は全般
+        $cat_map = [6 => '漏水調査']; // index6=漏水質問のみ明示。他は全般（index5「店舗営業」の内装誤分類を撤去）
         foreach (linova_faqs() as $i => $faq) {
             $id = wp_insert_post([
                 'post_type'    => 'faq',
@@ -416,6 +425,41 @@ add_action('wp_head', function () {
     echo '<link rel="icon" href="' . esc_url($f) . '" sizes="any">' . "\n";
     echo '<link rel="apple-touch-icon" href="' . esc_url($f) . '">' . "\n";
 }, 6);
+
+/**
+ * 施工事例 保存時: 工事種別(work_cat)未設定なら work_category テキストから自動付与。
+ * ACFの「カテゴリ」だけ埋めてタームを付け忘れても一覧フィルタで消えないようにする。
+ */
+add_action('save_post_work', function ($post_id) {
+    if (wp_is_post_revision($post_id) || (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)) return;
+    $existing = wp_get_object_terms($post_id, 'work_cat', ['fields' => 'ids']);
+    if (!is_wp_error($existing) && !empty($existing)) return; // 手動選択済は尊重
+    $label = function_exists('get_field') ? (string) get_field('work_category', $post_id) : '';
+    if ($label === '') return;
+    $map = [
+        '店舗' => 'store', '内装' => 'interior', '防水' => 'waterproof',
+        '屋根' => 'roof', '板金' => 'roof', '外壁' => 'wall', '塗装' => 'wall',
+        '雨漏' => 'leak', '漏水' => 'leak', '大規模' => 'large', '改修' => 'large',
+        '外構' => 'exterior', '設備' => 'facility',
+    ];
+    $slugs = [];
+    foreach ($map as $kw => $slug) {
+        if (mb_strpos($label, $kw) !== false) $slugs[] = $slug;
+    }
+    $slugs = array_values(array_unique($slugs));
+    if ($slugs) wp_set_object_terms($post_id, $slugs, 'work_cat');
+}, 20);
+
+/**
+ * テーマ有効化時: CPT/タクソノミを登録してから rewrite ルールをフラッシュ。
+ * 有効化直後の /works/・アーカイブ404を防ぐ。
+ */
+add_action('after_switch_theme', function () {
+    linova_register_post_types();
+    linova_ensure_work_terms();
+    linova_ensure_faq_terms();
+    flush_rewrite_rules();
+});
 
 /**
  * Contact Form 7: 既定CSSを読み込まない（テーマ側で制御）

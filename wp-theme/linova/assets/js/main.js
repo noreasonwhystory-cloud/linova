@@ -7,10 +7,17 @@
   var menu = document.getElementById('navmenu');
   var openNav = document.getElementById('openNav');
   var closeNav = document.getElementById('closeNav');
-  if (menu && openNav) openNav.onclick = function () { menu.classList.add('open'); };
-  if (menu && closeNav) closeNav.onclick = function () { menu.classList.remove('open'); };
+  function setNav(open) {
+    if (!menu) return;
+    menu.classList.toggle('open', open);
+    if (openNav) openNav.setAttribute('aria-expanded', open ? 'true' : 'false');
+    menu.setAttribute('aria-hidden', open ? 'false' : 'true');
+  }
+  if (menu) setNav(false);
+  if (menu && openNav) openNav.onclick = function () { setNav(true); };
+  if (menu && closeNav) closeNav.onclick = function () { setNav(false); };
   document.querySelectorAll('[data-nav]').forEach(function (a) {
-    a.addEventListener('click', function () { if (menu) menu.classList.remove('open'); });
+    a.addEventListener('click', function () { setNav(false); });
   });
 
   // header solid state + mobile CTA bar after scroll

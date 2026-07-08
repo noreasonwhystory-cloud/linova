@@ -7,7 +7,10 @@ $archive = get_post_type_archive_link('work') ?: $home . '#works';
 <?php while (have_posts()) : the_post();
     $cat    = linova_field('work_category');
     $desc   = linova_field('description');
-    if (!$desc) { $desc = get_the_excerpt(); }
+    // 本文は1回だけフィルタ適用して使い回す（the_content 多重発火を回避）
+    $raw_content  = get_the_content();
+    $body_html    = trim($raw_content) !== '' ? apply_filters('the_content', $raw_content) : '';
+    if (!$desc) { $desc = wp_trim_words(wp_strip_all_tags($raw_content), 60); } // 抜粋フィルタ再発火を避ける
 
     // ギャラリー画像URL配列を組み立て（photo_1..6→無ければ after/before）
     $imgs = [];
@@ -32,7 +35,7 @@ $archive = get_post_type_archive_link('work') ?: $home . '#works';
     $scope     = linova_field('work_scope');
     $period    = linova_field('work_period');
     $location  = linova_field('location');
-    $overview  = trim(get_the_content());
+    $overview  = trim($raw_content);
     $challenges = linova_field('challenges');
     $response  = linova_field('response');
     // 「よくあるご質問」(faq CPT)から選択されたQ&Aを引用
@@ -79,7 +82,7 @@ $archive = get_post_type_archive_link('work') ?: $home . '#works';
           <button class="gal-arrow prev" id="galPrev" aria-label="前へ"><i data-lucide="chevron-left"></i></button>
           <div class="gal-track" id="galTrack">
             <?php foreach ($imgs as $im) : ?>
-              <div class="gal-thumb"><img src="<?php echo esc_url($im['full']); ?>" alt="<?php echo esc_attr($im['alt']); ?>"></div>
+              <button type="button" class="gal-thumb" aria-label="この写真を大きく表示"><img src="<?php echo esc_url($im['full']); ?>" alt="<?php echo esc_attr($im['alt']); ?>" loading="lazy" decoding="async"></button>
             <?php endforeach; ?>
           </div>
           <button class="gal-arrow next" id="galNext" aria-label="次へ"><i data-lucide="chevron-right"></i></button>
@@ -100,7 +103,7 @@ $archive = get_post_type_archive_link('work') ?: $home . '#works';
   <!-- numbered sections -->
   <?php
   $steps = [];
-  if ($overview)   { $steps[] = ['ic' => 'house',       'title' => '工事の概要',   'teal' => false, 'body' => apply_filters('the_content', get_the_content())]; }
+  if ($overview)   { $steps[] = ['ic' => 'house',       'title' => '工事の概要',   'teal' => false, 'body' => $body_html]; }
   if ($challenges) { $steps[] = ['ic' => 'user-round',  'title' => 'お客様の課題', 'teal' => false, 'checks' => preg_split('/\r\n|\r|\n/', trim($challenges))]; }
   if ($response)   { $steps[] = ['ic' => 'handshake',   'title' => 'LINOVAの対応', 'teal' => true,  'body' => wpautop(esc_html($response))]; }
   if ($steps) : ?>

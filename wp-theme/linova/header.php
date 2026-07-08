@@ -13,6 +13,7 @@ $home = home_url('/');
 <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
+<?php wp_body_open(); ?>
 <div class="page">
 
   <!-- ===== HEADER ===== -->
@@ -35,7 +36,7 @@ $home = home_url('/');
       </a>
       <a class="hdr-line" href="<?php echo esc_url($p['lineUrl']); ?>"><span class="line-badge">LINE</span><span class="hl-label">LINEで相談</span></a>
       <a class="hdr-contact" href="<?php echo esc_url($home . '#contact'); ?>"><i data-lucide="mail"></i>お問い合わせ</a>
-      <button class="burger" id="openNav" aria-label="メニュー"><i data-lucide="menu"></i></button>
+      <button class="burger" id="openNav" aria-label="メニュー" aria-expanded="false" aria-controls="navmenu"><i data-lucide="menu"></i></button>
     </div>
   </header>
 

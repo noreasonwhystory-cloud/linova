@@ -22,7 +22,7 @@ $home = home_url('/');
         <a href="<?php echo esc_url($home . 'privacy/'); ?>">プライバシーポリシー</a>
       </nav>
     </div>
-    <p class="cc">© <?php echo esc_html(date('Y')); ?> <?php echo esc_html($p['siteName']); ?>. All rights reserved.</p>
+    <p class="cc">© <?php echo esc_html(wp_date('Y')); ?> <?php echo esc_html($p['siteName']); ?>. All rights reserved.</p>
   </footer>
 
   <!-- ===== MOBILE CTA BAR (sticky, mobile only) ===== -->

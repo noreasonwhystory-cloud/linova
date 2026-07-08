@@ -50,7 +50,7 @@ $new_threshold = strtotime('-30 days', current_time('timestamp'));
             ?>
             <a class="wl-card" data-cat="<?php echo esc_attr(implode(' ', $slugs)); ?>" href="<?php the_permalink(); ?>">
               <div class="wl-media">
-                <?php if ($img_url) : ?><img src="<?php echo esc_url($img_url); ?>" alt="<?php echo esc_attr(get_the_title()); ?>"><?php endif; ?>
+                <?php if ($img_url) : ?><img loading="lazy" decoding="async" src="<?php echo esc_url($img_url); ?>" alt="<?php echo esc_attr(get_the_title()); ?>"><?php endif; ?>
                 <?php if ($label) : ?><span class="wl-cat"><?php echo esc_html($label); ?></span><?php endif; ?>
                 <?php if ($is_new) : ?><span class="wl-new">NEW</span><?php endif; ?>
               </div>

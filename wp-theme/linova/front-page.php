@@ -8,7 +8,7 @@ $home = home_url('/');
 
   <!-- ===== HERO ===== -->
   <section class="hero" id="top">
-    <img class="hero-bg" src="<?php echo esc_url($img); ?>/hero.png" alt="">
+    <img class="hero-bg" fetchpriority="high" src="<?php echo esc_url($img); ?>/hero.png" alt="">
     <div class="ov"></div>
     <div class="hero-in">
       <div class="hero-top">
@@ -34,12 +34,12 @@ $home = home_url('/');
       <div class="about-tx">
         <span class="eyebrow">ABOUT</span>
         <h2 class="display">法人・管理会社様のパートナーとして、確かな品質とスムーズな施工を。</h2>
-        <div class="about-img-m"><img src="<?php echo esc_url($img); ?>/about.png" alt="LINOVA 打ち合わせの様子"></div>
+        <div class="about-img-m"><img loading="lazy" decoding="async" src="<?php echo esc_url($img); ?>/about.png" alt="LINOVA 打ち合わせの様子"></div>
         <p class="lead">LINOVAは、外装・防水・板金・内装・外構など、建物に関するさまざまな課題に対応します。</p>
         <p class="lead">調査・提案から施工管理、アフターフォローまで一貫してサポートし、ご担当者様の負担を軽減します。</p>
       </div>
       <div class="about-media">
-        <img src="<?php echo esc_url($img); ?>/about.png" alt="LINOVA 打ち合わせの様子">
+        <img loading="lazy" decoding="async" src="<?php echo esc_url($img); ?>/about.png" alt="LINOVA 打ち合わせの様子">
       </div>
     </div>
   </section>
@@ -61,22 +61,22 @@ $home = home_url('/');
         <div class="flow-step">
           <div class="fs-head"><span class="fs-no">01</span><span class="fs-ic"><i data-lucide="search"></i></span></div>
           <h3>調査</h3><p>現地調査・原因特定</p>
-          <img class="fs-img" src="<?php echo esc_url($img); ?>/flow-1-chosa.png" alt="調査">
+          <img loading="lazy" decoding="async" class="fs-img" src="<?php echo esc_url($img); ?>/flow-1-chosa.png" alt="調査">
         </div>
         <div class="flow-step">
           <div class="fs-head"><span class="fs-no">02</span><span class="fs-ic"><i data-lucide="clipboard-list"></i></span></div>
           <h3>提案</h3><p>最適な工法と予算をご提案</p>
-          <img class="fs-img" src="<?php echo esc_url($img); ?>/flow-2-teian.png" alt="提案">
+          <img loading="lazy" decoding="async" class="fs-img" src="<?php echo esc_url($img); ?>/flow-2-teian.png" alt="提案">
         </div>
         <div class="flow-step">
           <div class="fs-head"><span class="fs-no">03</span><span class="fs-ic"><i data-lucide="hard-hat"></i></span></div>
           <h3>施工管理</h3><p>専門業者と連携し品質を管理</p>
-          <img class="fs-img" src="<?php echo esc_url($img); ?>/flow-3-kanri.png" alt="施工管理">
+          <img loading="lazy" decoding="async" class="fs-img" src="<?php echo esc_url($img); ?>/flow-3-kanri.png" alt="施工管理">
         </div>
         <div class="flow-step">
           <div class="fs-head"><span class="fs-no">04</span><span class="fs-ic"><i data-lucide="house"></i></span></div>
           <h3>アフターフォロー</h3><p>施工後もしっかりサポート</p>
-          <img class="fs-img" src="<?php echo esc_url($img); ?>/flow-4-after.png" alt="アフターフォロー">
+          <img loading="lazy" decoding="async" class="fs-img" src="<?php echo esc_url($img); ?>/flow-4-after.png" alt="アフターフォロー">
         </div>
       </div>
     </div>
@@ -107,8 +107,8 @@ $home = home_url('/');
         ?>
           <div class="svc">
             <div class="svc-media">
-              <?php if ($photo) : ?><img src="<?php echo esc_url($photo); ?>" alt="<?php echo esc_attr($s[2]); ?>"><?php endif; ?>
-              <?php if ($icon) : ?><span class="svc-icon"><img src="<?php echo esc_url($icon); ?>" alt=""></span><?php endif; ?>
+              <?php if ($photo) : ?><img loading="lazy" decoding="async" src="<?php echo esc_url($photo); ?>" alt="<?php echo esc_attr($s[2]); ?>"><?php endif; ?>
+              <?php if ($icon) : ?><span class="svc-icon"><img loading="lazy" decoding="async" src="<?php echo esc_url($icon); ?>" alt=""></span><?php endif; ?>
             </div>
             <div class="svc-body"><h3><?php echo esc_html($s[2]); ?></h3><p><?php echo esc_html($s[3]); ?></p><span class="chev"><i data-lucide="chevron-right"></i></span></div>
           </div>
@@ -147,7 +147,7 @@ $home = home_url('/');
                   ?>
                   <article class="sol-card">
                     <div class="sol-media">
-                      <?php if ($img_url) : ?><img src="<?php echo esc_url($img_url); ?>" alt="<?php echo esc_attr(get_the_title()); ?>"><?php endif; ?>
+                      <?php if ($img_url) : ?><img loading="lazy" decoding="async" src="<?php echo esc_url($img_url); ?>" alt="<?php echo esc_attr(get_the_title()); ?>"><?php endif; ?>
                       <?php if ($cat = linova_field('work_category')) : ?><span class="sol-cat"><?php echo esc_html($cat); ?></span><?php endif; ?>
                     </div>
                     <div class="sol-body">
@@ -170,7 +170,7 @@ $home = home_url('/');
               foreach ($sol_fallback as $c) : ?>
                 <article class="sol-card">
                   <div class="sol-media">
-                    <img src="<?php echo esc_url(linova_asset_img($c[0])); ?>" alt="<?php echo esc_attr($c[2]); ?>">
+                    <img loading="lazy" decoding="async" src="<?php echo esc_url(linova_asset_img($c[0])); ?>" alt="<?php echo esc_attr($c[2]); ?>">
                     <span class="sol-cat"><?php echo esc_html($c[1]); ?></span>
                   </div>
                   <div class="sol-body">
@@ -212,8 +212,8 @@ $home = home_url('/');
             ?>
             <article class="case">
               <a class="case-media" href="<?php the_permalink(); ?>">
-                <?php if ($before_url) : ?><img src="<?php echo esc_url($before_url); ?>" alt="施工前"><?php endif; ?>
-                <?php if ($after_url) : ?><img src="<?php echo esc_url($after_url); ?>" alt="施工後"><?php endif; ?>
+                <?php if ($before_url) : ?><img loading="lazy" decoding="async" src="<?php echo esc_url($before_url); ?>" alt="施工前"><?php endif; ?>
+                <?php if ($after_url) : ?><img loading="lazy" decoding="async" src="<?php echo esc_url($after_url); ?>" alt="施工後"><?php endif; ?>
                 <span class="ba-tag before">BEFORE</span><span class="ba-tag after">AFTER</span>
                 <span class="ba-arrow"><i data-lucide="chevron-right"></i></span>
               </a>
@@ -239,8 +239,8 @@ $home = home_url('/');
           foreach ($fallback as $c) : ?>
             <article class="case">
               <div class="case-media">
-                <img src="<?php echo esc_url($img . '/' . $c[0] . '-before.png'); ?>" alt="施工前">
-                <img src="<?php echo esc_url($img . '/' . $c[0] . '-after.png'); ?>" alt="施工後">
+                <img loading="lazy" decoding="async" src="<?php echo esc_url($img . '/' . $c[0] . '-before.png'); ?>" alt="施工前">
+                <img loading="lazy" decoding="async" src="<?php echo esc_url($img . '/' . $c[0] . '-after.png'); ?>" alt="施工後">
                 <span class="ba-tag before">BEFORE</span><span class="ba-tag after">AFTER</span>
                 <span class="ba-arrow"><i data-lucide="chevron-right"></i></span>
               </div>
@@ -319,7 +319,7 @@ $home = home_url('/');
       </div>
       <div class="area-grid">
         <div class="map">
-          <img src="<?php echo esc_url($img); ?>/area-map.png" alt="対応エリアマップ（愛知県・岐阜県・三重県）">
+          <img loading="lazy" decoding="async" src="<?php echo esc_url($img); ?>/area-map.png" alt="対応エリアマップ（愛知県・岐阜県・三重県）">
         </div>
         <div class="area-side">
           <div class="area-note">
@@ -394,14 +394,14 @@ $home = home_url('/');
             ?>
             <p class="fsub">下記フォームに必要事項をご入力のうえ、送信してください。</p>
             <div class="form-row">
-              <div class="field"><label>お名前 <span class="req">必須</span></label><input type="text" placeholder="例）山田 太郎"></div>
-              <div class="field"><label>会社名 <span class="req">必須</span></label><input type="text" placeholder="例）株式会社○○建設"></div>
+              <div class="field"><label for="lf-name">お名前 <span class="req">必須</span></label><input id="lf-name" type="text" placeholder="例）山田 太郎"></div>
+              <div class="field"><label for="lf-company">会社名 <span class="req">必須</span></label><input id="lf-company" type="text" placeholder="例）株式会社○○建設"></div>
             </div>
             <div class="form-row">
-              <div class="field"><label>電話番号 <span class="req">必須</span></label><input type="tel" placeholder="例）090-1234-5678"></div>
-              <div class="field"><label>メールアドレス <span class="req">必須</span></label><input type="email" placeholder="例）info@linova-works.com"></div>
+              <div class="field"><label for="lf-tel">電話番号 <span class="req">必須</span></label><input id="lf-tel" type="tel" placeholder="例）090-1234-5678"></div>
+              <div class="field"><label for="lf-email">メールアドレス <span class="req">必須</span></label><input id="lf-email" type="email" placeholder="例）info@linova-works.com"></div>
             </div>
-            <div class="field"><label>ご相談内容 <span class="req">必須</span></label><textarea placeholder="例）雨漏りの調査・修繕について相談したい"></textarea></div>
+            <div class="field"><label for="lf-msg">ご相談内容 <span class="req">必須</span></label><textarea id="lf-msg" placeholder="例）雨漏りの調査・修繕について相談したい"></textarea></div>
             <p style="font-size:12px;color:var(--muted);margin-top:6px">※フォームは現在準備中です。お電話・LINEでお問い合わせください。</p>
             <?php
         }
